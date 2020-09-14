@@ -13,6 +13,8 @@ const PostRoute = require("./routes/post");
 const ProfileRoute = require("./routes/profile");
 const UserRoute = require("./routes/user");
 
+const db = require("./db");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -30,6 +32,9 @@ app.use("/auth", AuthRoute);
 app.use("/post", PostRoute);
 app.use("/profile", ProfileRoute);
 
-app.listen(port, () => {
-  console.log("listening at ", port);
+db.once("open", () => {
+  console.log("Connected to DB");
+  app.listen(port, () => {
+    console.log("listening at ", port);
+  });
 });
