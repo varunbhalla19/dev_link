@@ -4,10 +4,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const middleware = (req, res, next) => {
   console.log("inside auth middleware");
-
   const token = req.get("x-auth-token");
-
-  console.log("token is ", token);
 
   if (!token) {
     return res.status(401).json({ msg: "No token, Authorization denied!" });
