@@ -76,23 +76,17 @@ router.get("/user/:id", (req, res) => {
     .then((profile) => {
       profile
         ? res.status(200).json(profile)
-        : res
-            .status(500)
-            .json({ errors: [{ msg: "No Profile of this User found" }] });
+        : res.status(500).json({ msg: "No Profile of this User found" });
     })
     .catch((er) => {
       // console.log('er is ',er);
       er.kind === "ObjectId"
         ? res.status(500).json({
-            errors: [{ msg: "No Profile of this User found" }],
+            errors: { msg: "No Profile of this User found" },
           })
         : res.status(500).json({
-            errors: [
-              {
-                msg: er.message,
-                customMsg: "Err while fetching Profile",
-              },
-            ],
+            msg: er.message,
+            customMsg: "Err while fetching Profile",
           });
     });
 });
@@ -172,5 +166,10 @@ router.delete("/experience/:id", authMiddleware, (req, res) => {
       });
     });
 });
+
+
+
+
+// router.get("/repos/:username", authMiddleware, (req, res) => {});
 
 module.exports = router;
