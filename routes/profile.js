@@ -120,4 +120,57 @@ router.delete("/", authMiddleware, (req, res) => {
     });
 });
 
+router.put("/experience", authMiddleware, (req, res) => {
+  const expObj = {
+    title: req.body.title,
+    company: req.body.company,
+    from: req.body.from,
+    to: req.body.to,
+    current: req.body.current,
+    description: req.body.description,
+  };
+  ProfileModel.findOneAndUpdate(
+    { user: req.userId },
+    { $push: { experience: expObj } },
+    { new: true }
+  )
+    .then((profOb) => {
+      console.log("updated object ", profOb);
+      res.status(200).json(profOb);
+    })
+    .catch((er) => {
+      res.status(500).json({
+        errors: [
+          {
+            msg: er.message,
+            customMsg: "Err while Deleting",
+          },
+        ],
+      });
+    });
+});
+
+router.delete("/experience/:id", authMiddleware, (req, res) => {
+  const postId = req.params.id,
+    userId = req.userId;
+  ProfileModel.findOneAndUpdate(
+    { user: userId },
+    { $pull: { experience: { _id: postId } } },
+    { new: true }
+  )
+    .then((prof) => {
+      res.json(prof);
+    })
+    .catch((er) => {
+      res.status(500).json({
+        errors: [
+          {
+            msg: er.message,
+            customMsg: "Err Deleting Experience",
+          },
+        ],
+      });
+    });
+});
+
 module.exports = router;
