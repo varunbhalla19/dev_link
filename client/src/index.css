@@ -21,8 +21,10 @@ ul {
 *::-moz-selection {
   /* color: red; */
   background: slateblue;
+  color: whitesmoke;
 }
 *::selection {
   /* color: red; */
   background: slategray;
+  color: whitesmoke;
 }
