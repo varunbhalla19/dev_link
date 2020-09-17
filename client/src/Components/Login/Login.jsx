@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { alertActionCreator } from "../../redux/reducers/alert-reducer";
+import { loginActionCreator } from "../../redux/reducers/auth-reducer";
+
+import Alert from "../Alert/Alert";
 
 const initValues = {
   email: "",
@@ -9,11 +15,14 @@ const initValues = {
 
 const changeInput = (name, value, values) => ({ ...values, [name]: value });
 
-const Login = () => {
+const Login = ({ dispatchfunc, login, isAuth }) => {
   const [values, setValues] = useState(initValues);
-  return (
+
+  return isAuth ? (
+    <Redirect to="/" />
+  ) : (
     <>
-      {/* <div className="alert alert-danger">Invalid credentials</div> */}
+      <Alert />
       <h1 className="large text-primary">Log In</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Sign into Your Account
@@ -23,6 +32,7 @@ const Login = () => {
         onSubmit={(ev) => {
           ev.preventDefault();
           console.log(values);
+          login(values);
         }}
       >
         <div className="form-group">
@@ -48,6 +58,9 @@ const Login = () => {
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Login" />
+        <button onClick={(ev) => dispatchfunc("danger", "Just an Alert")}>
+          Dispatch!
+        </button>
       </form>
       <p className="my-1">
         Don't have an account? <Link to="/signup">Sign Up</Link>
@@ -56,4 +69,13 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default connect(
+  (state) => ({
+    isAuth: state.auth.isAuth,
+  }),
+  (dispatch) => ({
+    dispatchfunc: (style, message) =>
+      dispatch(alertActionCreator(style, message)),
+    login: (loginData) => dispatch(loginActionCreator(loginData)),
+  })
+)(Login);

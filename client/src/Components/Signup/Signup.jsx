@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+
+import { alertActionCreator } from "../../redux/reducers/alert-reducer";
+import { signupActionCreator } from "../../redux/reducers/auth-reducer";
+
+import Alert from "../Alert/Alert";
 
 const initValues = {
   name: "",
@@ -11,10 +17,14 @@ const initValues = {
 
 const changeInput = (name, value, values) => ({ ...values, [name]: value });
 
-const Signup = () => {
+const Signup = ({ setWarning, signup, isAuth }) => {
   const [values, setValues] = useState(initValues);
-  return (
+
+  return isAuth ? (
+    <Redirect to="/" />
+  ) : (
     <>
+      <Alert />
       <h1 className="large text-primary">Sign Up</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Create Your Account
@@ -23,7 +33,12 @@ const Signup = () => {
         className="form"
         onSubmit={(ev) => {
           ev.preventDefault();
-          console.log(values);
+          if (values.password !== values.password2) {
+            setWarning("danger", "Passwords didn't match");
+          } else {
+            console.log(values);
+            signup(values);
+          }
         }}
       >
         <div className="form-group">
@@ -48,10 +63,6 @@ const Signup = () => {
             name="email"
             value={values.email}
           />
-          {/* <small className="form-text">
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
-          </small> */}
         </div>
         <div className="form-group">
           <input
@@ -88,4 +99,11 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default connect(
+  ({ auth }) => ({ isAuth: auth.isAuth }),
+  (dispatch) => ({
+    setWarning: (style, message) =>
+      dispatch(alertActionCreator(style, message)),
+    signup: (signupData) => dispatch(signupActionCreator(signupData)),
+  })
+)(Signup);

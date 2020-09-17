@@ -36,7 +36,7 @@ router.post(
                     process.env.JWT_SECRET,
                     (er, token) => {
                       if (er) {
-                        return res.status(500).send({
+                        return res.status(500).json({
                           error: [
                             {
                               msg: er.message,
@@ -46,13 +46,13 @@ router.post(
                         });
                       }
                       console.log("token is ", token);
-                      return res.status(200).send({ user: user, token: token });
+                      return res.status(200).json({ user: user, token: token });
                     }
                   );
                 } else {
-                  res.status(401).json({
+                  res.status(401).json({errors : [{
                     msg: "Wrong Credentials",
-                  });
+                  }]});
                 }
               })
               .catch((er) => {

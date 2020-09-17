@@ -1,7 +1,10 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
-const Navbar = () => (
+import { authActionTypes } from "../../redux/reducers/auth-reducer";
+
+const Navbar = ({ isAuth, logout }) => (
   <nav className="navbar bg-dark">
     <h1>
       <Link to="/">
@@ -12,14 +15,33 @@ const Navbar = () => (
       <li>
         <NavLink to="/profiles">Developers</NavLink>
       </li>
-      <li>
-        <NavLink to="/signup">Signup</NavLink>
-      </li>
-      <li>
-        <NavLink to="/login">Login</NavLink>
-      </li>
+      {isAuth ? (
+        <li>
+          <a
+            href="#"
+            onClick={(ev) => {
+              ev.preventDefault();
+              logout();
+            }}
+          >
+            Logout
+          </a>
+        </li>
+      ) : (
+        <>
+          <li>
+            <NavLink to="/signup">Signup</NavLink>
+          </li>
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+        </>
+      )}
     </ul>
   </nav>
 );
 
-export default Navbar;
+export default connect(
+  ({ auth }) => ({ isAuth: auth.isAuth }),
+  (dispatch) => ({ logout: () => dispatch({ type: authActionTypes.LOGOUT }) })
+)(Navbar);

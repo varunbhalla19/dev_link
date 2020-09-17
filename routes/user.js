@@ -9,6 +9,7 @@ router.get("/", authMiddleware, (req, res) => {
   const { userId } = req;
 
   return UserModel.findById(userId)
+    .select("-password")
     .then((user) => {
       return res.status(200).send({ user });
     })
