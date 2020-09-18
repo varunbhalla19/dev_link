@@ -1,5 +1,14 @@
 const mongoose = require("mongoose");
 
+const ExpSchema = new mongoose.Schema({
+  title: String,
+  company: String,
+  from: Date,
+  to: Date,
+  current: Boolean,
+  description: String,
+});
+
 const ProfileSchema = new mongoose.Schema(
   {
     user: {
@@ -13,16 +22,7 @@ const ProfileSchema = new mongoose.Schema(
     skills: [String],
     bio: String,
     githubUsername: String,
-    experience: [
-      {
-        title: String,
-        company: String,
-        from: Date,
-        to: Date,
-        current: Boolean,
-        description: String,
-      },
-    ],
+    experience: [ExpSchema],
     education: [
       {
         school: String,
@@ -33,16 +33,13 @@ const ProfileSchema = new mongoose.Schema(
         current: Boolean,
       },
     ],
-    social: {
-      linkedin: String,
-      facebook: String,
-      twitter: String,
-    },
+
+    linkedin: String,
+    twitter: String,
   },
   { timestamps: true }
 );
 
 const ProfileModel = mongoose.model("Profile", ProfileSchema);
-
 
 module.exports = ProfileModel;

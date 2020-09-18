@@ -13,12 +13,12 @@ const Navbar = ({ isAuth, logout }) => (
     </h1>
     <ul>
       <li>
-        <NavLink to="/profiles">Developers</NavLink>
+        <NavLink to="/dashboard">Developers</NavLink>
       </li>
       {isAuth ? (
         <li>
           <a
-            href="#"
+            href="#!"
             onClick={(ev) => {
               ev.preventDefault();
               logout();
@@ -43,5 +43,10 @@ const Navbar = ({ isAuth, logout }) => (
 
 export default connect(
   ({ auth }) => ({ isAuth: auth.isAuth }),
-  (dispatch) => ({ logout: () => dispatch({ type: authActionTypes.LOGOUT }) })
+  (dispatch) => ({
+    logout: () => {
+      dispatch({ type: "CLEAR_PROFILE" });
+      dispatch({ type: authActionTypes.LOGOUT });
+    },
+  })
 )(Navbar);

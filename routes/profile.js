@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { check, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
 const authMiddleware = require("../middleware/auth");
 const ProfileModel = require("../model/Profile");
@@ -23,34 +23,54 @@ router.get("/me", authMiddleware, (req, res) => {
     });
 });
 
-router.post("/", authMiddleware, (req, res) => {
-  const id = req.userId;
-  const profileObj = {
-    user: id,
-    company: req.body.company,
-    website: req.body.website,
-    location: req.body.location,
-    status: req.body.status,
-    skills: req.body.skills || [],
-    bio: req.body.bio,
-    githubUsername: req.body.githubUsername,
-    social: {
+router.post(
+  "/",
+  [
+    body("skills").notEmpty().withMessage("Get some Skills"),
+    body("githubUsername")
+      .notEmpty()
+      .withMessage("Provide or Make a Github account atleast!"),
+  ],
+  authMiddleware,
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).send(errors);
+    }
+    const id = req.userId;
+    const profileObj = {
+      user: id,
+      company: req.body.company,
+      website: req.body.website,
+      location: req.body.location,
+      status: req.body.status,
+      skills: req.body.skills || [],
+      bio: req.body.bio,
+      githubUsername: req.body.githubUsername,
       twitter: req.body.twitter,
-      facebook: req.body.facebook,
       linkedin: req.body.linkedin,
-    },
-  };
-
-  console.log("profileObj ", profileObj);
-  return ProfileModel.findOneAndUpdate(
-    { user: id },
-    { $set: profileObj },
-    { new: true, upsert: true, setDefaultsOnInsert: true }
-  ).then((newProf) => {
-    console.log(newProf);
-    res.send(newProf);
-  });
-});
+    };
+    return ProfileModel.findOneAndUpdate(
+      { user: id },
+      { $set: profileObj },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    )
+      .then((newProf) => {
+        console.log(newProf);
+        res.status(200).json(newProf);
+      })
+      .catch((er) => {
+        res.status(500).json({
+          errors: [
+            {
+              msg: er.message,
+              customMsg: "Err Creating or Updating Profile",
+            },
+          ],
+        });
+      });
+  }
+);
 
 router.get("/", (req, res) => {
   return ProfileModel.find()
@@ -97,7 +117,7 @@ router.delete("/", authMiddleware, (req, res) => {
     .then((prof) =>
       UserModel.findByIdAndRemove(req.userId).then(() => {
         console.log("Deleted");
-        res.json({
+        res.status(200).json({
           msg: "Deleted!",
         });
       })
@@ -123,6 +143,7 @@ router.put("/experience", authMiddleware, (req, res) => {
     current: req.body.current,
     description: req.body.description,
   };
+  console.log(expObj);
   ProfileModel.findOneAndUpdate(
     { user: req.userId },
     { $push: { experience: expObj } },
@@ -145,15 +166,15 @@ router.put("/experience", authMiddleware, (req, res) => {
 });
 
 router.delete("/experience/:id", authMiddleware, (req, res) => {
-  const postId = req.params.id,
+  const expId = req.params.id,
     userId = req.userId;
   ProfileModel.findOneAndUpdate(
     { user: userId },
-    { $pull: { experience: { _id: postId } } },
+    { $pull: { experience: { _id: expId } } },
     { new: true }
   )
     .then((prof) => {
-      res.json(prof);
+      res.status(200).json(prof);
     })
     .catch((er) => {
       res.status(500).json({
@@ -166,9 +187,6 @@ router.delete("/experience/:id", authMiddleware, (req, res) => {
       });
     });
 });
-
-
-
 
 // router.get("/repos/:username", authMiddleware, (req, res) => {});
 
