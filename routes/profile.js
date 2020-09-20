@@ -49,6 +49,7 @@ router.post(
       githubUsername: req.body.githubUsername,
       twitter: req.body.twitter,
       linkedin: req.body.linkedin,
+      picName: req.body.picName,
     };
     return ProfileModel.findOneAndUpdate(
       { user: id },

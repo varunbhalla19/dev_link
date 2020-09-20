@@ -23,17 +23,17 @@ const ProfileSchema = new mongoose.Schema(
     bio: String,
     githubUsername: String,
     experience: [ExpSchema],
-    education: [
-      {
-        school: String,
-        degree: String,
-        field: String,
-        from: Date,
-        to: Date,
-        current: Boolean,
-      },
-    ],
-
+    // education: [
+    //   {
+    //     school: String,
+    //     degree: String,
+    //     field: String,
+    //     from: Date,
+    //     to: Date,
+    //     current: Boolean,
+    //   },
+    // ],
+    picName: String,
     linkedin: String,
     twitter: String,
   },

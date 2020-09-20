@@ -86,7 +86,10 @@ export const createProfileActionCreator = (values, history) => (
   getState
 ) => {
   const token = getState().auth.token;
-  values.skills = values.skills.split(",");
+
+  values.skills = Array.isArray(values.skills)
+    ? values.skills
+    : values.skills.split(",");
   console.log(values);
   return fetch("/profile", {
     method: "POST",
@@ -109,7 +112,7 @@ export const createProfileActionCreator = (values, history) => (
         type: profileActionTypes.CREATE_PROFILE_SUCCESS,
         payload: data,
       });
-      history.push("/dashboard");
+      history.push("/profile");
     })
     .catch((er) => {
       console.log(er, er.data);

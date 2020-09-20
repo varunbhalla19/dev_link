@@ -11,6 +11,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import CreateProfile from "./Components/CreateProfile/CreateProfile";
 import EditProfile from "./Components/EditProfile/EditProfile";
 import AddExp from "./Components/AddExp/AddExp";
+import EditPic from "./Components/EditPic/EditPic";
 
 import { initAuthActionCreator } from "./redux/reducers/auth-reducer";
 
@@ -32,10 +33,12 @@ function App({ initAuth }) {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/profile" component={Dashboard} />
             <Route path="/create-profile" component={CreateProfile} />
             <Route path="/edit-profile" component={EditProfile} />
             <Route path="/add-experience" component={AddExp} />
+            <Route path="/edit-pic" component={EditPic} />
+            {/* <Route path="/profile" component={Profile} /> */}
           </Switch>
         </section>
       </BrowserRouter>

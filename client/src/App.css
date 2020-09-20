@@ -404,6 +404,8 @@ button {
 
 .profile-top img {
   width: 250px;
+  padding: 1rem;
+  filter: drop-shadow(2px 3px 6px black);
 }
 
 .profile-top .icons a {
@@ -428,7 +430,15 @@ button {
 }
 
 .profile-exp {
-  grid-area: exp;
+  /* grid-area: exp; */
+  grid-column-end: span 2;
+}
+
+.profile-exp > .exp-cover {
+  /* background: yellow; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
 }
 
 .profile-edu {
@@ -438,14 +448,15 @@ button {
 .profile-exp h2,
 .profile-edu h2 {
   margin-bottom: 1rem;
+  text-align: center;
 }
 
-.profile-exp > div,
+/* .profile-exp > div,
 .profile-edu > div {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: #ccc 1px dotted;
-}
+} */
 
 .profile-exp > div:last-child,
 .profile-edu > div:last-child {

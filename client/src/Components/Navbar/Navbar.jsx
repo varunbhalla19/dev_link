@@ -13,7 +13,7 @@ const Navbar = ({ isAuth, logout }) => (
     </h1>
     <ul>
       <li>
-        <NavLink to="/dashboard">Developers</NavLink>
+        <NavLink to="/profile">Profile</NavLink>
       </li>
       {isAuth ? (
         <li>
