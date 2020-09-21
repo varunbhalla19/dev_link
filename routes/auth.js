@@ -50,9 +50,13 @@ router.post(
                     }
                   );
                 } else {
-                  res.status(401).json({errors : [{
-                    msg: "Wrong Credentials",
-                  }]});
+                  res.status(401).json({
+                    errors: [
+                      {
+                        msg: "Wrong Credentials",
+                      },
+                    ],
+                  });
                 }
               })
               .catch((er) => {
@@ -107,7 +111,12 @@ router.post(
             return bcrypt.hash(password, 5, (er, hash) => {
               if (!er) {
                 console.log("hashed password ", hash);
-                return UserModel.create({ name, email, password: hash })
+                return UserModel.create({
+                  name,
+                  email,
+                  password: hash,
+                  picName: "",
+                })
                   .then((savedUser) => {
                     console.log("saved user ", savedUser);
                     const payload = { id: savedUser.id };

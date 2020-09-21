@@ -222,3 +222,35 @@ export const deleteProfileActionCreator = (history) => (dispatch, getState) => {
     });
 };
 
+export const updatePicActionCreator = (value, history) => (
+  dispatch,
+  getState
+) => {
+  console.log("Got picname ", value);
+  const token = getState().auth.token;
+  return fetch("/users/pic", {
+    method: "POST",
+    headers: {
+      "x-auth-token": token,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ picName: value }),
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          const er = new Error("Updating Pic failed!");
+          er.data = data;
+          throw er;
+        });
+      }
+    })
+    .then((data) => history.push("/profile"))
+    .catch((er) => {
+      console.log(er, er.data);
+      dispatch(alertActionCreator("danger", er.data.errors[0].msg));
+      // dispatch({ type: profileActionTypes.CREATE_PROFILE_ERR });
+    });
+};

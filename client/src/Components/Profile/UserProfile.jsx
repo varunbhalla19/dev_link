@@ -22,6 +22,7 @@ const UserProfile = ({ match, profile, getProfile, user }) => {
       exist={profile.exist}
       delfunc={null}
       deleteExp={null}
+      user={null}
       isMe={user._id === profile.profile.user._id}
     />
   );

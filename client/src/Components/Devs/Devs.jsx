@@ -23,8 +23,9 @@ const Devs = ({ profiles, getProfs }) => {
         {profiles.map((profile) => (
           <div key={profile._id} className="profile bg-light">
             <img
+              style={{ filter: "drop-shadow(2px 3px 6px black)" }}
               className="round-img"
-              src={`https://robohash.org/${profile.picName}?set=set5`}
+              src={`https://robohash.org/${profile.user.picName}?set=set5`}
               alt=""
             />
             <div>

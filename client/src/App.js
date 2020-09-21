@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Navbar from "./Components/Navbar/Navbar";
@@ -14,10 +14,9 @@ import AddExp from "./Components/AddExp/AddExp";
 import EditPic from "./Components/EditPic/EditPic";
 import Devs from "./Components/Devs/Devs";
 import UserProfile from "./Components/Profile/UserProfile";
-// import {  } from "react-router-dom";
-import { initAuthActionCreator } from "./redux/reducers/auth-reducer";
+import Posts from "./Components/Posts/Posts";
 
-// console.log(push);
+import { initAuthActionCreator } from "./redux/reducers/auth-reducer";
 
 function App({ initAuth }) {
   useEffect(() => {
@@ -41,6 +40,7 @@ function App({ initAuth }) {
             <Route path="/devs" component={Devs} />
             <Route path="/profile" component={MyProfile} />
             <Route path="/user/:userId" component={UserProfile} />
+            <Route path="/posts" component={Posts} />
           </Switch>
         </section>
       </BrowserRouter>

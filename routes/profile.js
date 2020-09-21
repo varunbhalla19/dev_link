@@ -9,7 +9,7 @@ const UserModel = require("../model/User");
 
 router.get("/me", authMiddleware, (req, res) => {
   return ProfileModel.findOne({ user: req.userId })
-    .populate("user", ["name", "email"])
+    .populate("user", ["name", "email", "picName"])
     .then((profile) =>
       profile
         ? res.status(200).json(profile)
@@ -75,7 +75,7 @@ router.post(
 
 router.get("/", (req, res) => {
   return ProfileModel.find()
-    .populate("user", ["name", "email", "id"])
+    .populate("user", ["name", "email", "id", "picName"])
     .then((profiles) => {
       res.status(200).json(profiles);
     })
@@ -93,7 +93,7 @@ router.get("/", (req, res) => {
 
 router.get("/user/:id", (req, res) => {
   return ProfileModel.findOne({ user: req.params.id })
-    .populate("user", ["name", "email", "id"])
+    .populate("user", ["name", "email", "id","picName"])
     .then((profile) => {
       profile
         ? res.status(200).json(profile)

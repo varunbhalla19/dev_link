@@ -1,15 +1,15 @@
 import React from "react";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Dashboard = ({ profile, deleteExp, delfunc, isMe, exist }) => {
+const Dashboard = ({ profile, deleteExp, delfunc, isMe, exist, user }) => {
   console.log("is it my profile ", isMe);
 
   return !exist ? (
     <>
       {isMe ? (
         <>
-          <h1 className="large text-primary">{profile.user.name}</h1>
+          <h1 className="large text-primary">{user.name}</h1>
           <Link to="/create-profile" className="btn btn-dark">
             <i className="fas fa-user-circle text-primary"></i> Create Profile
           </Link>
@@ -28,7 +28,9 @@ const Dashboard = ({ profile, deleteExp, delfunc, isMe, exist }) => {
         <div className="profile-top bg-primary p-2">
           <img
             className="round-img my-1"
-            src={`https://robohash.org/${profile.picName}?set=set5`}
+            src={`https://robohash.org/${
+              profile.user.picName || profile.user.name
+            }?set=set5`}
             alt=""
             style={{
               background: "#1b1c34",

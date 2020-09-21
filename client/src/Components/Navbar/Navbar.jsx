@@ -18,6 +18,9 @@ const Navbar = ({ isAuth, logout }) => (
             <NavLink to="/profile">Profile</NavLink>
           </li>
           <li>
+            <NavLink to="/posts">Posts</NavLink>
+          </li>
+          <li>
             <a
               href="#!"
               onClick={(ev) => {

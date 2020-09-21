@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { createProfileActionCreator } from "../../redux/reducers/profile-reducer";
+import { updatePicActionCreator } from "../../redux/reducers/profile-reducer";
 
 import { useHistory } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const getNames = (name) =>
     .fill(0)
     .map((el) => generateNames(name));
 
-const EditPic = ({ profile, SubmitPic, name }) => {
+const EditPic = ({ SubmitPic, name }) => {
   const [selectedPic, selectPic] = useState(null);
 
   const [pics, setPics] = useState([]);
@@ -42,9 +42,7 @@ const EditPic = ({ profile, SubmitPic, name }) => {
         <button
           className="btn btn-success"
           onClick={() => {
-            profile.profile.picName = selectedPic;
-            console.log(profile.profile);
-            SubmitPic(profile.profile, history);
+            SubmitPic(selectedPic, history);
           }}
         >
           Submit
@@ -88,11 +86,10 @@ const EditPic = ({ profile, SubmitPic, name }) => {
 
 export default connect(
   (state) => ({
-    profile: state.profile,
-    name: state.profile.profile.githubUsername,
+    name: encodeURIComponent(state.auth.user.name),
   }),
   (dispatch) => ({
-    SubmitPic: (values, history) =>
-      dispatch(createProfileActionCreator(values, history)),
+    SubmitPic: (value, history) =>
+      dispatch(updatePicActionCreator(value, history)),
   })
 )(EditPic);

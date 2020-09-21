@@ -15,20 +15,27 @@ router.post("/", authMiddleware, (req, res) => {
     title: req.body.title,
     user: userId,
   })
-    .then((post) => res.status(200).json(post))
+    .then((post) =>
+      post
+        .populate("user")
+        .execPopulate()
+        .then((thePost) => {
+          res.status(200).json(thePost);
+        })
+    )
     .catch((er) => res.status(500).json({ msg: er.message }));
 });
 
-router.get("/", authMiddleware, (req, res) => {
+router.get("/", (req, res) => {
   Postmodel.find()
-    .populate("user", ["name", "email"])
+    .populate("user", ["name", "email", "picName"])
     .then((posts) => res.json(posts))
     .catch((er) => res.status(500).json({ msg: er.message }));
 });
 
 router.get("/:id", authMiddleware, (req, res) => {
   Postmodel.findById(req.params.id)
-    .populate("user", ["name", "email"])
+    .populate("user", ["name", "email", "picName"])
     .then((posts) =>
       posts
         ? res.json(posts)

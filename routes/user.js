@@ -20,4 +20,28 @@ router.get("/", authMiddleware, (req, res) => {
     });
 });
 
+router.post("/pic", authMiddleware, (req, res) => {
+  const { userId } = req;
+  const { picName } = req.body;
+  console.log("Got Pic Name ", req.body);
+  return UserModel.findByIdAndUpdate(
+    userId,
+    { $set: { picName: picName } },
+    { new: true }
+  )
+    .then((newUser) => {
+      res.status(200).json(newUser);
+    })
+    .catch((er) => {
+      res.status(500).json({
+        errors: [
+          {
+            msg: er.message,
+            customMsg: "Err Updating Profile Picture",
+          },
+        ],
+      });
+    });
+});
+
 module.exports = router;

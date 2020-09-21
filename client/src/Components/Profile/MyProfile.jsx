@@ -28,7 +28,8 @@ const MyProfile = (props) => {
       exist={props.profile.exist}
       delfunc={delfunc}
       deleteExp={props.deleteExp}
-      isMe={props.user._id === props.profile.profile.user._id}
+      isMe={true}
+      user={props.user}
     />
   );
 };
