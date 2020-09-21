@@ -1,22 +1,23 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Navbar from "./Components/Navbar/Navbar";
 import Showcase from "./Components/Showcase/Showcase";
 import Signup from "./Components/Signup/Signup";
 import Login from "./Components/Login/Login";
-import Dashboard from "./Components/Dashboard/Dashboard";
+import MyProfile from "./Components/Profile/MyProfile";
 import CreateProfile from "./Components/CreateProfile/CreateProfile";
 import EditProfile from "./Components/EditProfile/EditProfile";
 import AddExp from "./Components/AddExp/AddExp";
 import EditPic from "./Components/EditPic/EditPic";
-
+import Devs from "./Components/Devs/Devs";
+import UserProfile from "./Components/Profile/UserProfile";
+// import {  } from "react-router-dom";
 import { initAuthActionCreator } from "./redux/reducers/auth-reducer";
 
-// import PrivateComponents from "./Components/PrivateComponents/PrivateComponents";
-// const PrivateDashboard = PrivateComponents(Dashboard);
+// console.log(push);
 
 function App({ initAuth }) {
   useEffect(() => {
@@ -33,12 +34,13 @@ function App({ initAuth }) {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route path="/profile" component={Dashboard} />
             <Route path="/create-profile" component={CreateProfile} />
             <Route path="/edit-profile" component={EditProfile} />
             <Route path="/add-experience" component={AddExp} />
             <Route path="/edit-pic" component={EditPic} />
-            {/* <Route path="/profile" component={Profile} /> */}
+            <Route path="/devs" component={Devs} />
+            <Route path="/profile" component={MyProfile} />
+            <Route path="/user/:userId" component={UserProfile} />
           </Switch>
         </section>
       </BrowserRouter>

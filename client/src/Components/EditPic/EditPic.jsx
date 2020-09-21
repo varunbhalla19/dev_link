@@ -21,8 +21,6 @@ const EditPic = ({ profile, SubmitPic, name }) => {
 
   const regenerate = () => setPics(getNames(name));
 
-  //   const name = profile.profile.githubUsername;
-
   useEffect(() => {
     setPics(getNames(name));
   }, [setPics, name]);

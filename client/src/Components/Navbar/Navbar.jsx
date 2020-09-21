@@ -12,21 +12,23 @@ const Navbar = ({ isAuth, logout }) => (
       </Link>
     </h1>
     <ul>
-      <li>
-        <NavLink to="/profile">Profile</NavLink>
-      </li>
       {isAuth ? (
-        <li>
-          <a
-            href="#!"
-            onClick={(ev) => {
-              ev.preventDefault();
-              logout();
-            }}
-          >
-            Logout
-          </a>
-        </li>
+        <>
+          <li>
+            <NavLink to="/profile">Profile</NavLink>
+          </li>
+          <li>
+            <a
+              href="#!"
+              onClick={(ev) => {
+                ev.preventDefault();
+                logout();
+              }}
+            >
+              Logout
+            </a>
+          </li>
+        </>
       ) : (
         <>
           <li>
@@ -37,6 +39,9 @@ const Navbar = ({ isAuth, logout }) => (
           </li>
         </>
       )}
+      <li>
+        <NavLink to="/devs">Developers</NavLink>
+      </li>
     </ul>
   </nav>
 );
