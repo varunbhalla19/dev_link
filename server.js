@@ -22,6 +22,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+app.use("/users", UserRoute);
+app.use("/auth", AuthRoute);
+app.use("/post", PostRoute);
+app.use("/profile", ProfileRoute);
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
 
@@ -29,11 +34,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
-
-app.use("/users", UserRoute);
-app.use("/auth", AuthRoute);
-app.use("/post", PostRoute);
-app.use("/profile", ProfileRoute);
 
 db.once("open", () => {
   console.log("Connected to DB");
