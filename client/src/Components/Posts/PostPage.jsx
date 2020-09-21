@@ -6,12 +6,23 @@ import {
   submitCommentActionCreator,
   getSinglePostActionCreator,
   singlePostLikeUnlikeActionCreator,
+  singlePostDeleteActionCreator,
 } from "../../redux/reducers/post-reducer";
 
-const PostPage = ({ singlePost, match, getPost, likePost, authMe }) => {
+const PostPage = ({
+  singlePost,
+  match,
+  history,
+  getPost,
+  likePost,
+  authMe,
+  deletePost,
+}) => {
   useEffect(() => {
     getPost(match.params.postId);
   }, [getPost, match.params.postId]);
+
+  const redirectFunc = () => history.push("/posts");
 
   console.log(singlePost);
 
@@ -20,6 +31,8 @@ const PostPage = ({ singlePost, match, getPost, likePost, authMe }) => {
   const myLike = singlePost.exist
     ? post.likes.find((l) => l.user === authMe)
     : null;
+
+  const myPost = post.user ? authMe === post.user._id : false;
 
   return singlePost.loading ? (
     <h3> Loading... </h3>
@@ -57,6 +70,15 @@ const PostPage = ({ singlePost, match, getPost, likePost, authMe }) => {
         </span>
         {post.likes.length ? <span>{post.likes.length}</span> : null}
       </button>
+      {!myPost ? null : (
+        <button
+          type="button"
+          onClick={(ev) => deletePost(post._id, redirectFunc)}
+          className="btn btn-danger"
+        >
+          <i className="fas  fa-trash-alt "></i>
+        </button>
+      )}
 
       <ConnectedCommentForm postId={post._id} />
 
@@ -95,6 +117,8 @@ export default withRouter(
     (dispatch) => ({
       getPost: (id) => dispatch(getSinglePostActionCreator(id)),
       likePost: (postId) => dispatch(singlePostLikeUnlikeActionCreator(postId)),
+      deletePost: (postId, cb) =>
+        dispatch(singlePostDeleteActionCreator(postId, cb)),
     })
   )(PostPage)
 );

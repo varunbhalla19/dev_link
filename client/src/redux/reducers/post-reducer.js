@@ -5,6 +5,8 @@ const postActionTypes = {
   COMMENT_SUCCESS: "COMMENT_SUCCESS",
   SINGLEPOST_LIKEUNLIKE_SUCCESS: "SINGLEPOST_LIKEUNLIKE_SUCCESS",
   SINGLEPOST_LIKEUNLIKE_ERR: "SINGLEPOST_LIKEUNLIKE_ERR",
+  DEL_SINGLEPOST_SUCCESS: "DEL_SINGLEPOST_SUCCESS",
+  DEL_SINGLEPOST_ERR: "DEL_SINGLEPOST_ERR",
 };
 
 const initPost = {
@@ -38,6 +40,7 @@ export default (state = initPost, { type, payload }) => {
 
     case postActionTypes.COMMENT_ERR:
     case postActionTypes.SINGLEPOST_LIKEUNLIKE_ERR:
+    case postActionTypes.DEL_SINGLEPOST_ERR:
       return {
         ...state,
       };
@@ -147,6 +150,38 @@ export const singlePostLikeUnlikeActionCreator = (postId) => (
       console.log("Er Liking/Unliking", er.message, er.data);
       dispatch({
         type: postActionTypes.SINGLEPOST_LIKEUNLIKE_ERR,
+      });
+    });
+};
+
+export const singlePostDeleteActionCreator = (id, cb) => (
+  dispatch,
+  getState
+) => {
+  const token = getState().auth.token;
+  fetch(`/post/${id}`, {
+    method: "DELETE",
+    headers: {
+      "x-auth-token": token,
+    },
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        return res.json().then((data) => {
+          const er = new Error("Post Deleting failed!");
+          er.data = data;
+          throw er;
+        });
+      }
+    })
+    .then((data) => {
+      cb();
+    })
+    .catch((er) => {
+      dispatch({
+        type: postActionTypes.DELETE_POST_ER,
       });
     });
 };
