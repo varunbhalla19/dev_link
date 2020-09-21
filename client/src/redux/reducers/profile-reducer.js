@@ -57,7 +57,10 @@ export const profileActionCreator = () => (dispatch, getState) => {
   const token = getState().auth.token;
   console.log(token);
   // console.log('yo')
-  return fetch("/profile/me", { headers: { "x-auth-token": token } })
+  return fetch("/profile/me", {
+    headers: { "x-auth-token": token },
+    method: "GET",
+  })
     .then((res) => {
       if (res.status === 200) {
         return res.json();

@@ -13,6 +13,7 @@ export const authActionTypes = {
 export const initAuthActionCreator = () => (dispatch) => {
   const token = localStorage.getItem("token");
   fetch("/users", {
+    method : "GET",
     headers: {
       "x-auth-token": token,
     },

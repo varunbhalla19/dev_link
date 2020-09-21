@@ -51,7 +51,7 @@ export default (state = initPost, { type, payload }) => {
 };
 
 export const getSinglePostActionCreator = (id) => (dispatch) => {
-  fetch(`/post/${id}`)
+  fetch(`/post/${id}`, { method: "GET" })
     .then((res) => {
       if (res.status === 200) {
         return res.json();
