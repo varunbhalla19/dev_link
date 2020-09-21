@@ -34,9 +34,13 @@ router.get("/", (req, res) => {
     .catch((er) => res.status(500).json({ msg: er.message }));
 });
 
-router.get("/:id", authMiddleware, (req, res) => {
+router.get("/:id", (req, res) => {
   Postmodel.findById(req.params.id)
-    .populate("user", ["name", "email", "picName"])
+    .populate({
+      path: "comments",
+      populate: { path: "user", select: ["name", "picName"] },
+    })
+    .populate("user", ["name", "picName"])
     .then((posts) =>
       posts
         ? res.json(posts)
@@ -125,7 +129,17 @@ router.put("/comment/:postId", authMiddleware, (req, res) => {
     { new: true }
   )
     .then((profM) =>
-      profM ? res.json(profM) : res.json({ msg: "Post doesn't exist" })
+      profM
+        ? profM
+            .populate("user", ["name", "picName"])
+            .populate({
+              path: "comments",
+              populate: { path: "user", select: ["name", "picName"] },
+            })
+            .execPopulate()
+            // .execPopulate()
+            .then((newP) => res.json(newP))
+        : res.json({ msg: "Post doesn't exist" })
     )
     .catch((er) =>
       res.status(500).json({

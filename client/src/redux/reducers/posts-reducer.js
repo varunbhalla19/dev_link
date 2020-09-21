@@ -7,11 +7,18 @@ const postsActionTypes = {
   DELETE_POST_ER: "DELETE_POST_ER",
   LIKE_UNLIKE_SUCCESS: "LIKE_UNLIKE_SUCCESS",
   LIKE_UNLIKE_ERR: "LIKE_UNLIKE_ERR",
+  GET_SINGLEPOST_SUCCESS: "GET_SINGLEPOST_SUCCESS",
+  GET_SINGLEPOST_ERR: "GET_SINGLEPOST_ERR",
 };
 
 const initPosts = {
   loading: true,
   posts: [],
+  singlePost: {
+    loading: true,
+    exist: false,
+    post: {},
+  },
 };
 
 export default (state = initPosts, { type, payload }) => {
@@ -36,6 +43,20 @@ export default (state = initPosts, { type, payload }) => {
         posts: state.posts.map((post) =>
           post._id === payload._id ? payload : post
         ),
+      };
+    case postsActionTypes.GET_SINGLEPOST_SUCCESS:
+      return {
+        ...state,
+        singlePost: {
+          loading: false,
+          exist: true,
+          post: payload,
+        },
+      };
+    case postsActionTypes.GET_SINGLEPOST_ERR:
+      return {
+        ...state,
+        singlePost: { ...initPosts.singlePost },
       };
     case postsActionTypes.LIKE_UNLIKE_ERR:
     case postsActionTypes.CREATE_POSTS_ERR:
@@ -173,3 +194,30 @@ export const postLikeUnlikeActionCreator = (postId) => (dispatch, getState) => {
       });
     });
 };
+
+// export const getSinglePostActionCreator = (id) => (dispatch) => {
+//   fetch(`/post/${id}`)
+//     .then((res) => {
+//       if (res.status === 200) {
+//         return res.json();
+//       } else {
+//         return res.json().then((data) => {
+//           const er = new Error("Post fetching failed!");
+//           er.data = data;
+//           throw er;
+//         });
+//       }
+//     })
+//     .then((post) =>
+//       dispatch({
+//         type: postsActionTypes.GET_SINGLEPOST_SUCCESS,
+//         payload: post,
+//       })
+//     )
+//     .catch((er) => {
+//       console.log("fetching post failed!", er.message, er.data);
+//       dispatch({
+//         type: postsActionTypes.GET_SINGLEPOST_ERR,
+//       });
+//     });
+// };

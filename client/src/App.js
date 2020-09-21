@@ -15,6 +15,7 @@ import EditPic from "./Components/EditPic/EditPic";
 import Devs from "./Components/Devs/Devs";
 import UserProfile from "./Components/Profile/UserProfile";
 import Posts from "./Components/Posts/Posts";
+import PostPage from "./Components/Posts/PostPage";
 
 import { initAuthActionCreator } from "./redux/reducers/auth-reducer";
 
@@ -41,6 +42,7 @@ function App({ initAuth }) {
             <Route path="/profile" component={MyProfile} />
             <Route path="/user/:userId" component={UserProfile} />
             <Route path="/posts" component={Posts} />
+            <Route path="/post/:postId" component={PostPage} />
           </Switch>
         </section>
       </BrowserRouter>

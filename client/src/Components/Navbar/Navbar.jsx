@@ -17,9 +17,7 @@ const Navbar = ({ isAuth, logout }) => (
           <li>
             <NavLink to="/profile">Profile</NavLink>
           </li>
-          <li>
-            <NavLink to="/posts">Posts</NavLink>
-          </li>
+
           <li>
             <a
               href="#!"
@@ -42,6 +40,9 @@ const Navbar = ({ isAuth, logout }) => (
           </li>
         </>
       )}
+      <li>
+        <NavLink to="/posts">Posts</NavLink>
+      </li>
       <li>
         <NavLink to="/devs">Developers</NavLink>
       </li>

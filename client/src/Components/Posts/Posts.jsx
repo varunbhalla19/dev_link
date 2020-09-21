@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
+import { Link } from "react-router-dom";
+
 import {
   createPostActionCreator,
   getPostsActionCreator,
@@ -70,6 +72,7 @@ const Posts = ({ getPosts, posts, authMe, deletePost, likeUnlike }) => {
             myPost={authMe ? authMe === post.user._id : false}
             likeUnlike={likeUnlike}
             myLike={post.likes.find((p) => p.user === authMe)}
+            canLike={authMe}
           />
         ))}
       </div>
@@ -89,7 +92,7 @@ export default connect(
   })
 )(Posts);
 
-const ThePost = ({ post, myPost, deletePost, likeUnlike, myLike }) => {
+const ThePost = ({ post, myPost, deletePost, likeUnlike, myLike, canLike }) => {
   return (
     <div className="post bg-white p-1 my-1">
       <div>
@@ -109,7 +112,7 @@ const ThePost = ({ post, myPost, deletePost, likeUnlike, myLike }) => {
           Posted on {new Date(post.createdAt).toLocaleString("en-GB")}
         </p>
         <button
-          onClick={(ev) => likeUnlike(post._id)}
+          onClick={(ev) => (canLike ? likeUnlike(post._id) : false)}
           type="button"
           className="btn btn-light"
         >
@@ -118,17 +121,13 @@ const ThePost = ({ post, myPost, deletePost, likeUnlike, myLike }) => {
             {post.likes.length ? <span>{post.likes.length}</span> : null}
           </span>
         </button>
-
-        <button type="button" className="btn btn-light">
-          <i className="fas fa-comments"></i>
-        </button>
-
-        {post.comments.length ? (
-          <a href="post.html" className="btn btn-primary">
-            Discussion
-            <span className="comment-count"> {post.comments.length} </span>
-          </a>
-        ) : null}
+        <Link to={`/post/${post._id}`}>
+          <button type="button" className="btn btn-light">
+            <i className="fas fa-comments">
+              {!post.comments.length || post.comments.length}
+            </i>
+          </button>
+        </Link>
 
         {myPost ? (
           <button

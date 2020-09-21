@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   profile: profileReducer,
   devs: devReducer,
   posts: postsReducer,
-  post: postReducer,
+  singlePost: postReducer,
 });
 
 export default rootReducer;
