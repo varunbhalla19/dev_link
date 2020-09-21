@@ -28,6 +28,7 @@ router.post("/", authMiddleware, (req, res) => {
 
 router.get("/", (req, res) => {
   Postmodel.find()
+    .sort({ createdAt: -1 })
     .populate("user", ["name", "email", "picName"])
     .then((posts) => res.json(posts))
     .catch((er) => res.status(500).json({ msg: er.message }));
@@ -84,8 +85,11 @@ router.put("/likeUnlike/:id", authMiddleware, (req, res) => {
   const postId = req.params.id;
   const userId = req.userId;
 
+  console.log("userId is ", userId, " and postId ", postId);
+
   Postmodel.findById(postId)
     .then((post) => {
+      console.log("inside likeUnlike");
       let theLike = post.likes.findIndex(
         (like) => like.user.toString() === userId
       );
@@ -96,7 +100,12 @@ router.put("/likeUnlike/:id", authMiddleware, (req, res) => {
         console.log("not liked yet");
         post.likes.push({ user: userId });
       }
-      post.save().then((p) => res.json(p));
+      post.save().then((p) =>
+        p
+          .populate("user", ["name", "email", "picName"])
+          .execPopulate()
+          .then((pp) => res.json(pp))
+      );
     })
     .catch((er) =>
       res.status(500).json({

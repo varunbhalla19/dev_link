@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import {
   createPostActionCreator,
   getPostsActionCreator,
+  postDeleteActionCreator,
+  postLikeUnlikeActionCreator,
 } from "../../redux/reducers/posts-reducer";
 
 const PostForm = ({ sendPost }) => {
@@ -43,7 +45,7 @@ const ConnectedPostForm = connect(null, (dispatch) => ({
   sendPost: (post) => dispatch(createPostActionCreator(post)),
 }))(PostForm);
 
-const Posts = ({ getPosts, posts }) => {
+const Posts = ({ getPosts, posts, authMe, deletePost, likeUnlike }) => {
   useEffect(() => {
     getPosts();
   }, [getPosts]);
@@ -61,35 +63,14 @@ const Posts = ({ getPosts, posts }) => {
 
       <div className="posts">
         {posts.map((post) => (
-          <div key={post._id} className="post bg-white p-1 my-1">
-            <div>
-              <a href="profile.html">
-                <img
-                  className="round-img"
-                  src={`https://robohash.org/${post.user.picName}?set=set5`}
-                  alt=""
-                />
-                <h4>{post.user.name}</h4>
-              </a>
-            </div>
-            <div>
-              <p className="my-1">{post.content}</p>
-              <p className="post-date">Posted on 04/16/2019</p>
-              <button type="button" className="btn btn-light">
-                <i className="fas fa-thumbs-up"></i>
-                <span>4</span>
-              </button>
-              <button type="button" className="btn btn-light">
-                <i className="fas fa-thumbs-down"></i>
-              </button>
-              <a href="post.html" className="btn btn-primary">
-                Discussion <span className="comment-count">2</span>
-              </a>
-              <button type="button" className="btn btn-danger">
-                <i className="fas fa-times"></i>
-              </button>
-            </div>
-          </div>
+          <ThePost
+            key={post._id}
+            post={post}
+            deletePost={deletePost}
+            myPost={authMe ? authMe === post.user._id : false}
+            likeUnlike={likeUnlike}
+            myLike={post.likes.find((p) => p.user === authMe)}
+          />
         ))}
       </div>
     </>
@@ -99,8 +80,66 @@ const Posts = ({ getPosts, posts }) => {
 export default connect(
   (state) => ({
     posts: state.posts.posts,
+    authMe: state.auth.user._id,
   }),
   (dispatch) => ({
     getPosts: () => dispatch(getPostsActionCreator()),
+    deletePost: (id) => dispatch(postDeleteActionCreator(id)),
+    likeUnlike: (id) => dispatch(postLikeUnlikeActionCreator(id)),
   })
 )(Posts);
+
+const ThePost = ({ post, myPost, deletePost, likeUnlike, myLike }) => {
+  return (
+    <div className="post bg-white p-1 my-1">
+      <div>
+        <a href="profile.html">
+          <img
+            className="round-img"
+            src={`https://robohash.org/${post.user.picName}?set=set5`}
+            alt=""
+            style={{ filter: "drop-shadow(2px 3px 6px black)" }}
+          />
+          <h4>{post.user.name}</h4>
+        </a>
+      </div>
+      <div>
+        <p className="my-1">{post.content}</p>
+        <p className="post-date">
+          Posted on {new Date(post.createdAt).toLocaleString("en-GB")}
+        </p>
+        <button
+          onClick={(ev) => likeUnlike(post._id)}
+          type="button"
+          className="btn btn-light"
+        >
+          <span style={{ color: myLike ? "slateblue" : "black" }}>
+            <i className="fas fa-thumbs-up"></i>
+            {post.likes.length ? <span>{post.likes.length}</span> : null}
+          </span>
+        </button>
+
+        <button type="button" className="btn btn-light">
+          <i className="fas fa-comments"></i>
+        </button>
+
+        {post.comments.length ? (
+          <a href="post.html" className="btn btn-primary">
+            Discussion
+            <span className="comment-count"> {post.comments.length} </span>
+          </a>
+        ) : null}
+
+        {myPost ? (
+          <button
+            type="button"
+            onClick={(ev) => deletePost(post._id)}
+            className="btn btn-danger"
+          >
+            <i className="fas  fa-trash-alt "></i>
+          </button>
+        ) : null}
+      </div>
+    </div>
+  );
+};

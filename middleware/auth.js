@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const middleware = (req, res, next) => {
-  console.log("inside auth middleware");
+  // console.log("inside auth middleware");
   const token = req.get("x-auth-token");
 
   if (!token) {
