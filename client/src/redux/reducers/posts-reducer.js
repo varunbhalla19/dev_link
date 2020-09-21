@@ -106,7 +106,10 @@ export const createPostActionCreator = (post) => (dispatch, getState) => {
 };
 
 export const getPostsActionCreator = () => (dispatch) => {
-  fetch("/post", { method: "GET" })
+  fetch("/post", {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+  })
     .then((res) => {
       if (res.status === 200) {
         return res.json();

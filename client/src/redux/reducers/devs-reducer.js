@@ -41,7 +41,10 @@ export default (state = initProfiles, { type, payload }) => {
 };
 
 export const getDevProfsActionCreator = () => (dispatch) => {
-  return fetch("/profile", { method: "GET" })
+  return fetch("/profile", {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+  })
     .then((res) => {
       if (res.status === 200) {
         return res.json();
