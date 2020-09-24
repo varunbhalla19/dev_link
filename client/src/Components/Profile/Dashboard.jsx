@@ -97,7 +97,19 @@ const Dashboard = ({ profile, deleteExp, delfunc, isMe, exist, user }) => {
                       <strong>Description: </strong>
                       {exp.description}
                     </p>
-                    <p className="text-gray exp-dates ">Oct 2011 - Current</p>
+                    <p className="text-gray exp-dates ">
+                      {new Date(exp.from).toLocaleDateString(undefined, {
+                        month: "short",
+                        year: "numeric",
+                      })}{" "}
+                      -{" "}
+                      {exp.current
+                        ? "Current"
+                        : new Date(exp.to).toLocaleDateString(undefined, {
+                            month: "short",
+                            year: "numeric",
+                          })}
+                    </p>
                     {!isMe ? null : (
                       <div className="del-btn-cover">
                         <button
