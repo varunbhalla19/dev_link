@@ -2,24 +2,29 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { ReactComponent as CodeSvg } from "../../Assets/SVGs/code4.svg";
+
 import { authActionTypes } from "../../redux/reducers/auth-reducer";
 
+import "./nav.css";
+
 const Navbar = ({ isAuth, logout }) => (
-  <nav className="navbar bg-dark">
-    <h1>
-      <Link to="/">
-        <i className="fas fa-code"></i> DevLink
-      </Link>
-    </h1>
+  <nav className="navbar ">
+    {/* <h1> */}
+    <Link className="main-logo" to="/">
+      <CodeSvg id="thelogosvg" />
+      {/* DevLink */}
+    </Link>
+    {/* </h1> */}
     <ul>
       {isAuth ? (
         <>
           <li>
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLink activeClassName="head-purple" className="nav-links"  to="/profile">Profile</NavLink>
           </li>
 
           <li>
-            <a
+            <a className="nav-links"
               href="#!"
               onClick={(ev) => {
                 ev.preventDefault();
@@ -33,18 +38,18 @@ const Navbar = ({ isAuth, logout }) => (
       ) : (
         <>
           <li>
-            <NavLink to="/signup">Signup</NavLink>
+            <NavLink className="nav-links" activeClassName="head-orange" to="/signup">Signup</NavLink>
           </li>
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink className="nav-links" activeClassName="head-pink" to="/login">Login</NavLink>
           </li>
         </>
       )}
       <li>
-        <NavLink to="/posts">Posts</NavLink>
+        <NavLink className="nav-links" activeClassName="head-red" to="/posts">Posts</NavLink>
       </li>
       <li>
-        <NavLink to="/devs">Developers</NavLink>
+        <NavLink className="nav-links" to="/devs">Developers</NavLink>
       </li>
     </ul>
   </nav>

@@ -1,0 +1,55 @@
+.pink-btn {
+  background: var(--pink);
+  color: whitesmoke;
+}
+
+.landing {
+  position: relative;
+  align-self: stretch;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+/* background: url("./Assets/Images/showcase2.jpg") no-repeat center center/cover; */
+/* background: url("./Assets/SVGs/Taieri-dark.svg") no-repeat center center/cover; */
+/* background: #17141d; */
+/* background: #12181b; */
+
+.landing-inner {
+  width: 80%;
+  margin: auto;
+  padding: 2rem 0;
+  /* color: #fff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+}
+
+#thecodesvg {
+  stroke-dasharray: 902.66192px;
+  stroke-dashoffset: 902.66192px;
+  animation: gen 2s ease-in-out forwards;
+}
+
+@keyframes gen {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+
+@media (max-width: 700px) {
+  .landing-inner {
+    width: 95%;
+  }
+}
+.landing-inner svg {
+  max-width: 200px;
+  max-height: 200px;
+}

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="189.98868mm"
+   height="130.13722mm"
+   viewBox="0 0 189.98868 130.13722"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="code.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient829">
+      <stop
+         style="stop-color:#ff8800;stop-opacity:1"
+         offset="0"
+         id="stop825" />
+      <stop
+         style="stop-color:#e52e71;stop-opacity:1"
+         offset="1"
+         id="stop827" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient829"
+       id="linearGradient831"
+       x1="9.9711685"
+       y1="84.615013"
+       x2="207.61"
+       y2="84.971764"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0.55047425)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient829"
+       id="linearGradient835"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.97676445,0,0,0.97676445,6.9707235,6.0851515)"
+       x1="9.9711685"
+       y1="84.615013"
+       x2="207.61"
+       y2="84.971764" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="422.46078"
+     inkscape:cy="209.03576"
+     inkscape:document-units="mm"
+     inkscape:current-layer="text817"
+     showgrid="false"
+     inkscape:snap-nodes="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1366"
+     inkscape:window-height="713"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-13.856148,-27.600961)">
+    <g
+       aria-label="&lt;/&gt;"
+       transform="scale(0.96129231,1.0402663)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:130.80789185px;line-height:1.25;font-family:Bahnschrift;-inkscape-font-specification:Bahnschrift;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#501616;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       id="text817">
+      <path
+         inkscape:connector-curvature="0"
+         id="path833"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:130.80789185px;font-family:'Victor Mono';-inkscape-font-specification:'Victor Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient835);fill-opacity:1;stroke-width:0.26458332"
+         d="M 140.52949,27.985974 H 130.24617 L 90.386923,139.43504 31.130096,88.734087 71.560756,54.159101 64.68147,46.570483 16.710207,88.734087 87.215186,150.17913 h 8.246876 L 136.9737,38.136405 l 57.97914,51.662391 -39.66254,33.749034 6.49522,7.23371 47.97127,-42.047453 z"
+         sodipodi:nodetypes="ccccccccccccccc" />
+    </g>
+  </g>
+</svg>

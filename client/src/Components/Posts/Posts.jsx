@@ -10,13 +10,15 @@ import {
   postLikeUnlikeActionCreator,
 } from "../../redux/reducers/posts-reducer";
 
+import "./posts.css";
+
 const PostForm = ({ sendPost }) => {
   const [postData, setPostData] = useState("");
 
   return (
     <>
       <div className="post-form">
-        <div className="bg-primary p">
+        <div className="bg-red p">
           <h3>Say Something...</h3>
         </div>
         <form
@@ -36,7 +38,7 @@ const PostForm = ({ sendPost }) => {
             value={postData}
             onChange={(ev) => setPostData(ev.target.value)}
           ></textarea>
-          <input type="submit" className="btn btn-dark my-1" value="Submit" />
+          <input type="submit" className="btn btn-red my-1" value="Submit" />
         </form>
       </div>
     </>
@@ -55,9 +57,9 @@ const Posts = ({ getPosts, posts, authMe, deletePost, likeUnlike }) => {
   console.log("posts are ", posts);
 
   return (
-    <>
-      <h1 className="large text-primary">Posts</h1>
-      <p className="lead">
+    <div className="landing-inner  ">
+      <h1 className="large head-red">Posts</h1>
+      <p className="lead text-gray ">
         <i className="fas fa-user"></i> Welcome to the community!
       </p>
 
@@ -76,7 +78,7 @@ const Posts = ({ getPosts, posts, authMe, deletePost, likeUnlike }) => {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
@@ -94,37 +96,43 @@ export default connect(
 
 const ThePost = ({ post, myPost, deletePost, likeUnlike, myLike, canLike }) => {
   return (
-    <div className="post bg-white p-1 my-1">
+    <div className="post bg-darky p-1 my-1">
       <div>
-        <a href="profile.html">
+        <Link className="post-user-link" to={`/user/${post.user._id}`}>
           <img
             className="round-img"
             src={`https://robohash.org/${post.user.picName}?set=set5`}
             alt=""
             style={{ filter: "drop-shadow(2px 3px 6px black)" }}
           />
-          <h4>{post.user.name}</h4>
-        </a>
+          <h3 className="theme-heading">{post.user.name}</h3>
+        </Link>
       </div>
       <div>
-        <p className="my-1">{post.content}</p>
-        <p className="post-date">
+        <p className="my-1 text-white">{post.content}</p>
+        <p className="post-date text-gray">
           Posted on {new Date(post.createdAt).toLocaleString("en-GB")}
         </p>
+
         <button
           onClick={(ev) => (canLike ? likeUnlike(post._id) : false)}
           type="button"
-          className="btn btn-light"
+          className="btn btn-dark"
         >
-          <span style={{ color: myLike ? "slateblue" : "black" }}>
-            <i className="fas fa-thumbs-up"></i>
-            {post.likes.length ? <span>{post.likes.length}</span> : null}
+          <span className="text-gray">
+            <i className={`fas fa-thumbs-up ${myLike ? "head-red" : ""} `}></i>
+            {post.likes.length ? (
+              <span className="m">{post.likes.length}</span>
+            ) : null}
           </span>
         </button>
+
         <Link to={`/post/${post._id}`}>
-          <button type="button" className="btn btn-light">
-            <i className="fas fa-comments">
-              {!post.comments.length || post.comments.length}
+          <button type="button" className="btn btn-dark">
+            <i className="fas fa-comments text-gray">
+              {!post.comments.length || (
+                <span className="m"> {post.comments.length} </span>
+              )}
             </i>
           </button>
         </Link>

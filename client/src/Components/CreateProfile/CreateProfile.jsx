@@ -32,14 +32,14 @@ const CreateProfile = ({ submitProfile, editMode, profileData }) => {
   //   console.log(profileData);
 
   return (
-    <>
+    <div className="landing-inner" >
       <Alert />
-      <h1 className="large text-primary">Create Your Profile</h1>
-      <p className="lead">
-        <i className="fas fa-user"></i> Let's get some information to make your
+      <h1 className="large head-brown">Create Your Profile</h1>
+      <p className="lead text-gray ">
+        <i className="fas fa-user text-gray"></i> Let's get some information to make your
         profile stand out
       </p>
-      <small>* = required field</small>
+      <small className="text-gray" >* = required field</small>
       <form
         className="form"
         onSubmit={(ev) => {
@@ -60,7 +60,7 @@ const CreateProfile = ({ submitProfile, editMode, profileData }) => {
             <option value="Intern">Intern</option>
             <option value="Other">Other</option>
           </select>
-          <small className="form-text">
+          <small className="form-text text-gray">
             Give us an idea of where you are at in your career
           </small>
         </div>
@@ -72,7 +72,7 @@ const CreateProfile = ({ submitProfile, editMode, profileData }) => {
             onChange={onChangefunc}
             value={values.company}
           />
-          <small className="form-text">
+          <small className="form-text text-gray">
             Could be your own company or one you work for
           </small>
         </div>
@@ -84,7 +84,7 @@ const CreateProfile = ({ submitProfile, editMode, profileData }) => {
             name="website"
             value={values.website}
           />
-          <small className="form-text">
+          <small className="form-text text-gray">
             Could be your own or a company website
           </small>
         </div>
@@ -96,7 +96,7 @@ const CreateProfile = ({ submitProfile, editMode, profileData }) => {
             name="location"
             value={values.location}
           />
-          <small className="form-text">
+          <small className="form-text text-gray">
             City & state suggested (eg. Boston, MA)
           </small>
         </div>
@@ -108,7 +108,7 @@ const CreateProfile = ({ submitProfile, editMode, profileData }) => {
             name="skills"
             value={values.skills}
           />
-          <small className="form-text">
+          <small className="form-text text-gray">
             Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
           </small>
         </div>
@@ -132,15 +132,15 @@ const CreateProfile = ({ submitProfile, editMode, profileData }) => {
             name="bio"
             value={values.bio}
           ></textarea>
-          <small className="form-text">Tell us a little about yourself</small>
+          <small className="form-text text-gray">Tell us a little about yourself</small>
         </div>
 
-        <div className="my-2">
+        {/* <div className="my-2">
           <button type="button" className="btn btn-light">
             Add Social Network Links
           </button>
           <span>Optional</span>
-        </div>
+        </div> */}
 
         <div className="form-group social-input">
           <i className="fab fa-twitter fa-2x"></i>
@@ -163,12 +163,12 @@ const CreateProfile = ({ submitProfile, editMode, profileData }) => {
             value={values.linkedin}
           />
         </div>
-        <input type="submit" className="btn btn-primary my-1" />
-        <Link className="btn btn-light my-1" to="/dashboard">
+        <input type="submit" className="btn bg-brown my-1" />
+        <Link className="btn bg-darky my-1" to="/profile">
           Go Back
         </Link>
       </form>
-    </>
+    </div>
   );
 };
 

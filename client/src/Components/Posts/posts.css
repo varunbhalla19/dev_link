@@ -1,0 +1,9 @@
+.head-red {
+    color: var(--danger-color);
+  }
+
+.personal-post-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

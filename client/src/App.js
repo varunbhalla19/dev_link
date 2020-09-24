@@ -28,23 +28,20 @@ function App({ initAuth }) {
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        <Route exact path="/" component={Showcase} />
-
-        <section className="container">
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route path="/create-profile" component={CreateProfile} />
-            <Route path="/edit-profile" component={EditProfile} />
-            <Route path="/add-experience" component={AddExp} />
-            <Route path="/edit-pic" component={EditPic} />
-            <Route path="/devs" component={Devs} />
-            <Route path="/profile" component={MyProfile} />
-            <Route path="/user/:userId" component={UserProfile} />
-            <Route path="/posts" component={Posts} />
-            <Route path="/post/:postId" component={PostPage} />
-          </Switch>
-        </section>
+        <Switch>
+          <Route exact path="/" component={Showcase} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+          <Route path="/create-profile" component={CreateProfile} />
+          <Route path="/edit-profile" component={EditProfile} />
+          <Route path="/add-experience" component={AddExp} />
+          <Route path="/edit-pic" component={EditPic} />
+          <Route path="/devs" component={Devs} />
+          <Route path="/profile" component={MyProfile} />
+          <Route path="/user/:userId" component={UserProfile} />
+          <Route path="/posts" component={Posts} />
+          <Route path="/post/:postId" component={PostPage} />
+        </Switch>
       </BrowserRouter>
     </div>
   );

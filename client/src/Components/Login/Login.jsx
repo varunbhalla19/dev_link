@@ -21,10 +21,10 @@ const Login = ({ dispatchfunc, login, isAuth }) => {
   return isAuth ? (
     <Redirect to="/" />
   ) : (
-    <>
+    <div className="landing-inner">
       <Alert />
-      <h1 className="large text-primary">Log In</h1>
-      <p className="lead">
+      <h1 className="large head-pink">Log In</h1>
+      <p className="lead text-gray ">
         <i className="fas fa-user"></i> Sign into Your Account
       </p>
       <form
@@ -57,15 +57,15 @@ const Login = ({ dispatchfunc, login, isAuth }) => {
             }
           />
         </div>
-        <input type="submit" className="btn btn-primary" value="Login" />
-        <button onClick={(ev) => dispatchfunc("danger", "Just an Alert")}>
+        <input type="submit" className="btn btn-pink" value="Login" />
+        {/* <button onClick={(ev) => dispatchfunc("danger", "Just an Alert")}>
           Dispatch!
-        </button>
+        </button> */}
       </form>
-      <p className="my-1">
+      <p className="my-1 text-gray">
         Don't have an account? <Link to="/signup">Sign Up</Link>
       </p>
-    </>
+    </div>
   );
 };
 

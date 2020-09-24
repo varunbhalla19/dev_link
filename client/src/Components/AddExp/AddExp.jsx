@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PrivateComponents from "../PrivateComponents/PrivateComponents";
 import { addExpActionCreator } from "../../redux/reducers/profile-reducer";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { Alert } from "../Alert/Alert";
 
 const initValues = {
@@ -27,15 +27,17 @@ export const AddExp = ({ addExp }) => {
   const onChangefunc = (ev) =>
     setValues(inpChange(ev.target.name, ev.target.value, values));
 
+  // console.log(values.current);
+
   return (
-    <>
+    <div className="landing-inner">
       <Alert />
-      <h1 className="large text-primary">Add An Experience</h1>
-      <p className="lead">
+      <h1 className="large head-green">Add An Experience</h1>
+      <p className="lead text-gray ">
         <i className="fas fa-code-branch"></i> Add any developer/programming
         positions that you have had in the past
       </p>
-      <small>* = required field</small>
+      <small className="text-gray">* = required field</small>
       <form
         onSubmit={(ev) => {
           ev.preventDefault();
@@ -74,7 +76,7 @@ export const AddExp = ({ addExp }) => {
           />
         </div>
         <div className="form-group">
-          <h4>From Date</h4>
+          <h4 className="text-gray">From Date</h4>
           <input
             type="date"
             name="from"
@@ -83,18 +85,20 @@ export const AddExp = ({ addExp }) => {
           />
         </div>
         <div className="form-group">
-          <p>
+          <p className="text-gray">
             <input
               type="checkbox"
               name="current"
               value={values.current}
-              onChange={onChangefunc}
+              onChange={(ev) =>
+                setValues(inpChange(ev.target.name, ev.target.checked, values))
+              }
             />
             Current Job
           </p>
         </div>
         <div className="form-group">
-          <h4>To Date</h4>
+          <h4 className="text-gray">To Date</h4>
           <input
             type="date"
             name="to"
@@ -113,12 +117,12 @@ export const AddExp = ({ addExp }) => {
             placeholder="Job Description"
           ></textarea>
         </div>
-        <input type="submit" className="btn btn-primary my-1" />
-        <a className="btn btn-light my-1" href="dashboard.html">
+        <input type="submit" className="btn bg-green my-1" />
+        <Link className="btn bg-dark my-1" to="/profile">
           Go Back
-        </a>
+        </Link>
       </form>
-    </>
+    </div>
   );
 };
 

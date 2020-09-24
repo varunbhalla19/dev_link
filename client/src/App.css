@@ -11,7 +11,24 @@
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
+  --danger-color2: #b33642;
   --success-color: #28a745;
+  --green: #09c372;
+  --orange: #fa8142;
+  --orange2: #ff8a00;
+  --pink: #e52e71;
+  --pinklight: #df4c82;
+  --dark: #12181b;
+  --darkL: #1b2327;
+  --dark2: #17141d;
+  --yellow: #ffcb2b;
+  --yellow2: #c49c26;
+  --gray: #454e56;
+  --txt-gray: #7a7a8c;
+  --purple: #9166cc;
+  --purple2: #7d4bc3;
+  --brown: #6d4c41;
+  --brown2: #5d4037;
 }
 
 * {
@@ -26,8 +43,8 @@ body {
   font-family: "Exo 2";
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
-  color: #333;
+  background-color: #17141d;
+  background: #12181b;
 }
 
 * {
@@ -53,8 +70,16 @@ img {
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin-top: 6rem;
-  margin-bottom: 3rem;
+  flex-grow: 1;
+  display: flex;
+  /* margin-top: 6rem; */
+  /* margin-bottom: 3rem; */
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Text Styles*/
@@ -75,6 +100,14 @@ img {
   margin-bottom: 1rem;
 }
 
+.text-gray {
+  color: #b2becd;
+}
+
+.text-white {
+  color: white;
+}
+
 .text-center {
   text-align: center;
 }
@@ -85,6 +118,74 @@ img {
 
 .text-dark {
   color: var(--dark-color);
+}
+
+.head-pink {
+  color: var(--pink);
+}
+
+.head-green {
+  color: var(--green);
+}
+
+.head-purple {
+  color: var(--purple);
+}
+
+.head-red {
+  color: var(--danger-color);
+}
+
+.head-brown {
+  color: var(--brown);
+}
+
+.head-yellow {
+  color: var(--yellow);
+}
+
+.bg-red {
+  background: var(--danger-color2);
+  color: white;
+}
+
+.bg-brown {
+  background: var(--brown2);
+  color: white;
+}
+
+.bg-purple {
+  background: var(--purple2);
+  color: white;
+}
+
+.bg-yellow {
+  background-color: var(--yellow2);
+  color: white;
+}
+
+.bg-green {
+  background-color: var(--green);
+  color: white;
+}
+
+.bg-green {
+  background-color: var(--green);
+  color: white;
+}
+
+.bg-blue {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.theme-heading,
+.nav-links:hover {
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  text-shadow: none;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Padding */
@@ -141,8 +242,8 @@ img {
 
 .btn {
   display: inline-block;
-  background: var(--light-color);
-  color: #333;
+  /* background: var(--light-color); */
+  /* color: #333; */
   padding: 0.4rem 1.3rem;
   font-size: 1rem;
   border: none;
@@ -150,6 +251,7 @@ img {
   margin-right: 0.5rem;
   transition: opacity 0.2s ease-in;
   outline: none;
+  border-radius: 4px;
 }
 
 .badge {
@@ -174,6 +276,7 @@ img {
 .badge-primary,
 .alert-primary {
   background: var(--primary-color);
+  background: #fa8142;
   color: #fff;
 }
 
@@ -185,6 +288,11 @@ img {
   color: #333;
 }
 
+.btn-pink {
+  background-color: var(--pinklight);
+  color: white;
+}
+
 .btn-dark,
 .bg-dark,
 .badge-dark,
@@ -193,12 +301,22 @@ img {
   color: #fff;
 }
 
+.bg-darky {
+  background: var(--darkL);
+  color: white;
+}
+
 .btn-danger,
 .bg-danger,
 .badge-danger,
 .alert-danger {
   background: var(--danger-color);
   color: #fff;
+}
+
+.btn-red {
+  background: var(--danger-color2);
+  color: white;
 }
 
 .btn-success,
@@ -237,16 +355,6 @@ img {
   margin: 1.5rem 0;
 }
 
-/* Overlay */
-.dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
 /* Forms */
 .form .form-group {
   margin: 1.2rem 0;
@@ -268,7 +376,14 @@ img {
   width: 100%;
   padding: 0.4rem;
   font-size: 1.2rem;
-  border: 1px solid #ccc;
+  background-color: var(--darkL);
+  border: 1px solid darkslategray;
+  color: #b2becd;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
 }
 
 .form input[type="submit"],
@@ -312,64 +427,8 @@ button {
 }
 
 /* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.7rem 2rem;
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  top: 0;
-  border-bottom: solid 1px var(--primary-color);
-  opacity: 0.9;
-}
-
-.navbar ul {
-  display: flex;
-}
-
-.navbar a {
-  color: #fff;
-  padding: 0.45rem;
-  margin: 0 0.25rem;
-}
-
-.navbar a.active {
-  color: var(--link-active);
-}
-
-.navbar a:hover {
-  color: var(--primary-color);
-}
-
-.navbar .welcome span {
-  margin-right: 0.6rem;
-}
 
 /* Landing Page */
-.landing {
-  position: relative;
-  background: url("./Assets/Images/showcase2.jpg") no-repeat center center/cover;
-  height: 100vh;
-}
-
-.landing-inner {
-  color: #fff;
-  height: 100%;
-  width: 80%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.landing-inner svg {
-  max-width: 200px;
-  max-height: 200px;
-}
 
 /* Profiles Page */
 .profile {
@@ -383,18 +442,8 @@ button {
 }
 
 /* Profile Page */
-.profile-grid {
-  display: grid;
-  grid-template-areas:
-    "top top"
-    "about about"
-    "exp edu"
-    "github github";
-  grid-gap: 1rem;
-}
 
 .profile-top {
-  grid-area: top;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -429,24 +478,33 @@ button {
   text-align: center;
 }
 
-.profile-exp {
-  /* grid-area: exp; */
-  grid-column-end: span 2;
+.the-exp {
+  width: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-auto-flow: column;
+  padding: 1rem 0;
+  border-bottom: 1px solid #7a7a8c46;
 }
 
-.profile-exp > .exp-cover {
-  /* background: yellow; */
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.the-exp > h3 {
+  grid-column: span 2;
   text-align: center;
 }
 
-.profile-edu {
-  grid-area: edu;
+.the-exp > .del-btn-cover {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
-.profile-exp h2,
-.profile-edu h2 {
+.the-exp > .exp-dates {
+  text-align: right;
+}
+
+.profile-exp h2 {
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -458,32 +516,33 @@ button {
   border-bottom: #ccc 1px dotted;
 } */
 
-.profile-exp > div:last-child,
-.profile-edu > div:last-child {
+.profile-exp > div:last-child {
   border: 0;
 }
 
-.profile-exp p,
-.profile-edu p {
+.profile-exp p {
   margin: 0.5rem 0;
 }
 
-.profile-github {
-  grid-area: github;
-}
+/* Edit Pic */
 
-.profile-github .repo {
+.edit-pic-head {
+  padding: 1rem 0;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.profile-github .repo > div:first-child {
-  flex: 7;
-  flex-basis: 70%;
+.landing-edp {
+  width: 95% !important ;
 }
 
-.profile-github > div:last-child {
-  flex: 3;
-  flex-basis: 20%;
+.edp-images {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 1rem;
+  place-items: center;
 }
 
 /* Posts Page */
@@ -494,13 +553,19 @@ button {
 
 .post {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 3fr;
   grid-gap: 2rem;
   align-items: center;
+  border-radius: 1rem;
+  box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.5);
 }
 
 .post > div:first-child {
   text-align: center;
+}
+
+.post-user-link {
+  display: block;
 }
 
 .post img {
@@ -516,15 +581,21 @@ button {
 }
 
 .post .post-date {
-  color: #aaa;
+  /* color: #aaa; */
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
 }
 
+@media (max-width: 850px) {
+  .edp-images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
-  .container {
-    margin-top: 8rem;
+  .landing-inner {
+    width: 90%;
   }
 
   .hide-sm {
@@ -581,17 +652,22 @@ button {
     margin: auto;
   }
 
-  .profile-grid {
-    grid-template-areas:
-      "top"
-      "about"
-      "exp"
-      "edu"
-      "github";
-  }
-
   .profile-about .skills {
     flex-direction: column;
+  }
+
+  .the-exp {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+  }
+
+  .the-exp > *,
+  .the-exp > .exp-dates {
+    text-align: center;
+  }
+
+  .the-exp > .del-btn-cover {
+    display: block;
   }
 
   .dash-buttons a {
@@ -602,9 +678,26 @@ button {
 
   .post {
     grid-template-columns: 1fr;
+    text-align: center;
+    gap: 0.5rem;
+    place-items: center;
   }
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .edp-images {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-pic-head {
+    flex-direction: column;
+  }
+
+  .edit-pic-head > * {
+    margin: 1rem;
   }
 }

@@ -13,15 +13,15 @@ const Devs = ({ profiles, getProfs }) => {
   console.log("dev profiles ", profiles);
 
   return (
-    <>
+    <div className="landing-inner" >
       <h1 className="large text-primary">Developers</h1>
-      <p className="lead">
+      <p className="lead text-gray ">
         <i className="fab fa-connectdevelop"></i> Browse and connect with
         developers
       </p>
       <div className="profiles">
         {profiles.map((profile) => (
-          <div key={profile._id} className="profile bg-light">
+          <div key={profile._id} className="profile bg-darky">
             <img
               style={{ filter: "drop-shadow(2px 3px 6px black)" }}
               className="round-img"
@@ -29,12 +29,12 @@ const Devs = ({ profiles, getProfs }) => {
               alt=""
             />
             <div>
-              <h2>{profile.user.name}</h2>
-              <p>
+              <h2 className="theme-heading" style={{display:'inline-block'}} >{profile.user.name}</h2>
+              <p className="text-white" >
                 {profile.status} at {profile.company}
               </p>
-              <p>{profile.location}</p>
-              <Link to={`user/${profile.user._id}`} className="btn btn-primary">
+              <p className="text-gray" >{profile.location}</p>
+              <Link to={`user/${profile.user._id}`} className="btn bg-blue">
                 View Profile
               </Link>
             </div>
@@ -49,7 +49,7 @@ const Devs = ({ profiles, getProfs }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

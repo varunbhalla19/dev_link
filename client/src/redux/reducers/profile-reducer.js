@@ -154,7 +154,7 @@ export const addExpActionCreator = (values, history) => (
         type: profileActionTypes.ADD_EXP_SUCCESS,
         payload: data,
       });
-      history.push("/dashboard");
+      history.push("/profile");
     })
     .catch((er) => {
       console.log(er, er.data);

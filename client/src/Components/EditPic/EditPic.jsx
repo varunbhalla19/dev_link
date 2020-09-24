@@ -28,14 +28,8 @@ const EditPic = ({ SubmitPic, name }) => {
   console.log("inside EDITPIC ", name, pics, selectedPic);
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-        }}
-      >
+    <div className="landing-inner landing-edp ">
+      <div className="edit-pic-head">
         <button className="btn btn-primary" onClick={regenerate}>
           Regenerate Images
         </button>
@@ -54,14 +48,8 @@ const EditPic = ({ SubmitPic, name }) => {
           Cancel
         </button>
       </div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3,1fr)",
-          gap: "1rem",
-          margin: "1rem",
-        }}
-      >
+
+      <div className="edp-images">
         {pics.map((el) => (
           <div key={el}>
             <img
@@ -80,7 +68,7 @@ const EditPic = ({ SubmitPic, name }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
