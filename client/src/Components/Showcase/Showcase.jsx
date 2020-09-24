@@ -10,7 +10,7 @@ import "./showcase.css";
 const Showcase = ({ isAuth }) => (
   <div className="landing">
     {/* <div className="dark-overlay"> */}
-    <div className="landing-inner">
+    <div className="landing-inner landing-column">
       <h1 className="x-large theme-heading ">DevLink</h1>
       {/* <LinkSvg /> */}
       <TheSvg />

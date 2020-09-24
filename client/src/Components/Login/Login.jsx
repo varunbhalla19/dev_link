@@ -21,7 +21,7 @@ const Login = ({ dispatchfunc, login, isAuth }) => {
   return isAuth ? (
     <Redirect to="/" />
   ) : (
-    <div className="landing-inner">
+    <div className="landing-inner landing-column ">
       <Alert />
       <h1 className="large head-pink">Log In</h1>
       <p className="lead text-gray ">

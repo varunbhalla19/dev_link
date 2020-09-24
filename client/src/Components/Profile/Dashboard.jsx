@@ -35,9 +35,9 @@ const Dashboard = ({ profile, deleteExp, delfunc, isMe, exist, user }) => {
                   profile.user.picName || profile.user.name
                 }?set=set5`}
                 alt=""
-                style={{
-                  background: "#1b1c34",
-                }}
+                // style={{
+                //   // background: "#1b1c34",
+                // }}
               />
               <h1 className="large theme-heading">{profile.user.name}</h1>
               <p className="lead text-white ">

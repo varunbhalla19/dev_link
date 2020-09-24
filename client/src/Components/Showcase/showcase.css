@@ -30,6 +30,13 @@
   justify-content: center; */
 }
 
+.landing-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 #thecodesvg {
   stroke-dasharray: 902.66192px;
   stroke-dashoffset: 902.66192px;
@@ -41,8 +48,6 @@
     stroke-dashoffset: 0;
   }
 }
-
-
 
 @media (max-width: 700px) {
   .landing-inner {
