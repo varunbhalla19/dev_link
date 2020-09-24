@@ -21,7 +21,7 @@ import { initAuthActionCreator } from "./redux/reducers/auth-reducer";
 
 function App({ initAuth }) {
   useEffect(() => {
-    initAuth();
+    // initAuth();
   }, [initAuth]);
 
   return (
