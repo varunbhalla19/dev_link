@@ -13,7 +13,7 @@ const Devs = ({ profiles, getProfs }) => {
   console.log("dev profiles ", profiles);
 
   return (
-    <div className="landing-inner" >
+    <div className="landing-inner">
       <h1 className="large text-primary">Developers</h1>
       <p className="lead text-gray ">
         <i className="fab fa-connectdevelop"></i> Browse and connect with
@@ -25,15 +25,19 @@ const Devs = ({ profiles, getProfs }) => {
             <img
               style={{ filter: "drop-shadow(2px 3px 6px black)" }}
               className="round-img"
-              src={`https://robohash.org/${profile.user.picName}?set=set5`}
+              src={`https://robohash.org/${
+                profile.user.picName || profile.user.name
+              }?set=set5`}
               alt=""
             />
             <div>
-              <h2 className="theme-heading" style={{display:'inline-block'}} >{profile.user.name}</h2>
-              <p className="text-white" >
-                {profile.status} at {profile.company}
+              <h2 className="theme-heading" style={{ display: "inline-block" }}>
+                {profile.user.name}
+              </h2>
+              <p className="text-white">
+                {profile.status} {profile.company && " at " + profile.company}
               </p>
-              <p className="text-gray" >{profile.location}</p>
+              <p className="text-gray">{profile.location}</p>
               <Link to={`user/${profile.user._id}`} className="btn bg-blue">
                 View Profile
               </Link>

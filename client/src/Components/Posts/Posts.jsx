@@ -57,28 +57,29 @@ const Posts = ({ getPosts, posts, authMe, deletePost, likeUnlike }) => {
   console.log("posts are ", posts);
 
   return (
-    <div className="landing-inner  ">
-      <h1 className="large head-red">Posts</h1>
-      <p className="lead text-gray ">
-        <i className="fas fa-user"></i> Welcome to the community!
-      </p>
+    <>
+      <div className="landing-inner  ">
+        <h1 className="large head-red">Posts</h1>
+        <p className="lead text-gray ">
+          <i className="fas fa-user"></i> Welcome to the community!
+        </p>
+        {authMe && <ConnectedPostForm />}
 
-      <ConnectedPostForm />
-
-      <div className="posts">
-        {posts.map((post) => (
-          <ThePost
-            key={post._id}
-            post={post}
-            deletePost={deletePost}
-            myPost={authMe ? authMe === post.user._id : false}
-            likeUnlike={likeUnlike}
-            myLike={post.likes.find((p) => p.user === authMe)}
-            canLike={authMe}
-          />
-        ))}
+        <div className="posts">
+          {posts.map((post) => (
+            <ThePost
+              key={post._id}
+              post={post}
+              deletePost={deletePost}
+              myPost={authMe ? authMe === post.user._id : false}
+              likeUnlike={likeUnlike}
+              myLike={post.likes.find((p) => p.user === authMe)}
+              canLike={authMe}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -95,13 +96,16 @@ export default connect(
 )(Posts);
 
 const ThePost = ({ post, myPost, deletePost, likeUnlike, myLike, canLike }) => {
+  console.log(post);
   return (
     <div className="post bg-darky p-1 my-1">
       <div>
         <Link className="post-user-link" to={`/user/${post.user._id}`}>
           <img
             className="round-img"
-            src={`https://robohash.org/${post.user.picName}?set=set5`}
+            src={`https://robohash.org/${
+              post.user.picName || post.user.name
+            }?set=set5`}
             alt=""
             style={{ filter: "drop-shadow(2px 3px 6px black)" }}
           />

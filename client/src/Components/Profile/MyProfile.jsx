@@ -21,7 +21,7 @@ const MyProfile = (props) => {
   }, [getProfile]);
 
   return props.profile.loading ? (
-    <h2>Loading...</h2>
+    <h2 style={{textAlign:'center'}} className="head-purple" >Loading...</h2>
   ) : (
     <Dashboard
       profile={props.profile.profile}

@@ -59,7 +59,9 @@ const PostPage = ({
               <Link className="post-user-link" to={`/user/${post.user._id}`}>
                 <img
                   className="round-img"
-                  src={`https://robohash.org/${post.user.picName}?set=set5`}
+                  src={`https://robohash.org/${
+                    post.user.picName || post.user.name
+                  }?set=set5`}
                   style={{ filter: "drop-shadow(2px 3px 6px black)" }}
                   alt=""
                 />
@@ -70,7 +72,7 @@ const PostPage = ({
               <p className="my-1 text-white">{post.content}</p>
             </div>
           </div>
-          <div className="personal-post-buttons" >
+          <div className="personal-post-buttons">
             <button
               onClick={(ev) => (authMe ? likePost(post._id) : false)}
               type="button"
@@ -94,8 +96,7 @@ const PostPage = ({
               </button>
             )}
           </div>
-
-          <ConnectedCommentForm postId={post._id} />
+          {authMe && <ConnectedCommentForm postId={post._id} />}
 
           <div className="comments">
             {post.comments.map((comment) => (
@@ -107,7 +108,7 @@ const PostPage = ({
                   >
                     <img
                       className="round-img"
-                      src={`https://robohash.org/${comment.user.picName}?set=set5`}
+                      src={`https://robohash.org/${comment.user.picName || comment.user.name }?set=set5`}
                       alt=""
                     />
                     <h3 className="theme-heading">{comment.user.name}</h3>

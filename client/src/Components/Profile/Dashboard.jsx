@@ -41,7 +41,7 @@ const Dashboard = ({ profile, deleteExp, delfunc, isMe, exist, user }) => {
               />
               <h1 className="large theme-heading">{profile.user.name}</h1>
               <p className="lead text-white ">
-                {profile.status} at {profile.company}
+                {profile.status} {profile.company && " at " + profile.company}
               </p>
               <p className="text-gray">{profile.location}</p>
 
@@ -83,48 +83,59 @@ const Dashboard = ({ profile, deleteExp, delfunc, isMe, exist, user }) => {
             </div>
 
             {/* <!-- Experience --> */}
-            <div className="profile-exp bg-darky p-2">
-              <h2 className="head-purple">Experience</h2>
-              <div className="exp-cover">
-                {profile.experience.map((exp) => (
-                  <div className="the-exp" key={exp._id}>
-                    <h3 className="text-white">{exp.company}</h3>
-                    <p className="text-gray">
-                      <strong>Position: </strong>
-                      {exp.title}
-                    </p>
-                    <p className="text-gray">
-                      <strong>Description: </strong>
-                      {exp.description}
-                    </p>
-                    <p className="text-gray exp-dates ">
-                      {new Date(exp.from).toLocaleDateString(undefined, {
-                        month: "short",
-                        year: "numeric",
-                      })}{" "}
-                      -{" "}
-                      {exp.current
-                        ? "Current"
-                        : new Date(exp.to).toLocaleDateString(undefined, {
-                            month: "short",
-                            year: "numeric",
-                          })}
-                    </p>
-                    {!isMe ? null : (
-                      <div className="del-btn-cover">
-                        <button
-                          onClick={(ev) => deleteExp(exp._id)}
-                          className="btn btn-danger"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                ))}
+            {profile.experience.length ? (
+              <div className="profile-exp bg-darky p-2">
+                <h2 className="head-purple">Experience</h2>
+                <div className="exp-cover">
+                  {profile.experience.map((exp) => (
+                    <div className="the-exp" key={exp._id}>
+                      <h3 className="text-white">{exp.company}</h3>
+                      <p className="text-gray">
+                        {exp.title && (
+                          <>
+                            <strong>Position: </strong>
+                            {exp.title}
+                          </>
+                        )}
+                      </p>
+                      <p className="text-gray">
+                        {exp.description && (
+                          <>
+                            <strong>Description: </strong>
+                            {exp.description}
+                          </>
+                        )}
+                      </p>
+                      <p className="text-gray exp-dates ">
+                        {new Date(exp.from).toLocaleDateString(undefined, {
+                          month: "short",
+                          year: "numeric",
+                        })}{" "}
+                        -{" "}
+                        {exp.current
+                          ? "Current"
+                          : new Date(exp.to).toLocaleDateString(undefined, {
+                              month: "short",
+                              year: "numeric",
+                            })}
+                      </p>
+                      {!isMe ? null : (
+                        <div className="del-btn-cover">
+                          <button
+                            onClick={(ev) => deleteExp(exp._id)}
+                            className="btn btn-danger"
+                          >
+                            <i className="fas  fa-trash-alt "></i>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
+
           {isMe ? (
             <div className="my-2">
               <DelBut delfunc={delfunc} />
@@ -138,7 +149,7 @@ const Dashboard = ({ profile, deleteExp, delfunc, isMe, exist, user }) => {
 
 export default Dashboard;
 
-const DelBut = (delfunc) => (
+const DelBut = ({ delfunc }) => (
   <button onClick={(ev) => delfunc()} className="btn btn-danger">
     <i className="fas fa-user-minus"></i>
     Delete My Account

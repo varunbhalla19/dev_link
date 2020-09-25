@@ -20,15 +20,15 @@
 
 .landing-inner {
   width: 80%;
-  margin: auto;
+  margin: 1rem auto;
   padding: 2rem 0;
-  /* color: #fff;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
 }
+/* color: #fff;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center; */
 
 .landing-column {
   display: flex;
@@ -40,7 +40,7 @@
 #thecodesvg {
   stroke-dasharray: 902.66192px;
   stroke-dashoffset: 902.66192px;
-  animation: gen 2s ease-in-out forwards;
+  animation: gen 2s ease-in-out 1s forwards;
 }
 
 @keyframes gen {

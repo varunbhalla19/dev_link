@@ -197,6 +197,7 @@ export const deleteExpActionCreator = (id) => (dispatch, getState) => {
 
 export const deleteProfileActionCreator = (history) => (dispatch, getState) => {
   const token = getState().auth.token;
+  console.log('inside deleteProfile action creator.')
   fetch("/profile", {
     method: "DELETE",
     headers: {

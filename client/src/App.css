@@ -453,6 +453,7 @@ button {
 
 .profile-top img {
   width: 250px;
+  height: 250px;
   padding: 1rem;
   filter: drop-shadow(2px 3px 6px black);
 }
@@ -570,6 +571,7 @@ button {
 
 .post img {
   width: 100px;
+  height: 100px;
 }
 
 .post .comment-count {
@@ -649,6 +651,7 @@ button {
   .profile-top img,
   .profile img {
     width: 200px;
+    height: 200px;
     margin: auto;
   }
 

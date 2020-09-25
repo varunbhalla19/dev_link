@@ -24,7 +24,9 @@ const inpChange = (name, value, values) => ({ ...values, [name]: value });
 
 const CreateProfile = ({ submitProfile, editMode, profileData }) => {
   //   console.log(editMode, profileData);
-  const [values, setValues] = useState(editMode ? profileData : initValues);
+  const [values, setValues] = useState(
+    editMode ? { ...initValues, profileData } : initValues
+  );
   const history = useHistory();
   const onChangefunc = (ev) =>
     setValues(inpChange(ev.target.name, ev.target.value, values));
@@ -32,14 +34,14 @@ const CreateProfile = ({ submitProfile, editMode, profileData }) => {
   //   console.log(profileData);
 
   return (
-    <div className="landing-inner" >
+    <div className="landing-inner">
       <Alert />
       <h1 className="large head-brown">Create Your Profile</h1>
       <p className="lead text-gray ">
-        <i className="fas fa-user text-gray"></i> Let's get some information to make your
-        profile stand out
+        <i className="fas fa-user text-gray"></i> Let's get some information to
+        make your profile stand out
       </p>
-      <small className="text-gray" >* = required field</small>
+      <small className="text-gray">* = required field</small>
       <form
         className="form"
         onSubmit={(ev) => {
@@ -132,7 +134,9 @@ const CreateProfile = ({ submitProfile, editMode, profileData }) => {
             name="bio"
             value={values.bio}
           ></textarea>
-          <small className="form-text text-gray">Tell us a little about yourself</small>
+          <small className="form-text text-gray">
+            Tell us a little about yourself
+          </small>
         </div>
 
         {/* <div className="my-2">

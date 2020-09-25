@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 import Dashboard from "./Dashboard";
 
@@ -14,9 +14,19 @@ const UserProfile = ({ match, profile, getProfile, user }) => {
     getProfile(match.params.userId);
   }, [getProfile, match.params.userId]);
 
+  if (
+    !profile.loading &&
+    profile.exist &&
+    user._id === profile.profile.user._id
+  ) {
+    return <Redirect to="/profile" />;
+  }
+
   return profile.loading ? (
-    <h2>Loading...</h2>
-  ) : (
+    <h2 style={{ textAlign: "center" }} className="head-purple">
+      Loading...
+    </h2>
+  ) : profile.exist ? (
     <Dashboard
       profile={profile.profile}
       exist={profile.exist}
@@ -25,6 +35,11 @@ const UserProfile = ({ match, profile, getProfile, user }) => {
       user={null}
       isMe={user._id === profile.profile.user._id}
     />
+  ) : (
+    <h2 className="head-purple" style={{ textAlign: "center" }}>
+      {" "}
+      This Profile doesn't exist yet.{" "}
+    </h2>
   );
 };
 

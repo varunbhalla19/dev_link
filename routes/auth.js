@@ -5,6 +5,7 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../model/User");
+const ProfileModel = require("../model/Profile");
 
 router.get("/", (req, res) => res.send("Auth Route"));
 
@@ -131,7 +132,13 @@ router.post(
                             .send({ error: [{ msg: er.message }] });
                         }
                         console.log("token is ", token);
-                        res.status(200).send({ user: savedUser, token: token });
+                        ProfileModel.create({ user: savedUser._id }).then(
+                          (newProf) => {
+                            res
+                              .status(200)
+                              .send({ user: savedUser, token: token });
+                          }
+                        );
                       }
                     );
                   })
