@@ -22,10 +22,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use("/users", UserRoute);
-app.use("/auth", AuthRoute);
-app.use("/post", PostRoute);
-app.use("/profile", ProfileRoute);
+app.use("/api/users", UserRoute);
+app.use("/api/auth", AuthRoute);
+app.use("/api/post", PostRoute);
+app.use("/api/profile", ProfileRoute);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));

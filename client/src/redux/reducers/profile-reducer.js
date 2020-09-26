@@ -57,7 +57,7 @@ export const profileActionCreator = () => (dispatch, getState) => {
   const token = getState().auth.token;
   console.log(token);
   // console.log('yo')
-  return fetch("/profile/me", {
+  return fetch("/api/profile/me", {
     headers: { "x-auth-token": token },
     method: "GET",
   })
@@ -94,7 +94,7 @@ export const createProfileActionCreator = (values, history) => (
     ? values.skills
     : values.skills.split(",");
   console.log(values);
-  return fetch("/profile", {
+  return fetch("/api/profile", {
     method: "POST",
     body: JSON.stringify(values),
     headers: { "x-auth-token": token, "content-type": "application/json" },
@@ -130,7 +130,7 @@ export const addExpActionCreator = (values, history) => (
 ) => {
   console.log(values);
   const token = getState().auth.token;
-  fetch("/profile/experience", {
+  fetch("/api/profile/experience", {
     method: "PUT",
     headers: {
       "x-auth-token": token,
@@ -165,7 +165,7 @@ export const addExpActionCreator = (values, history) => (
 
 export const deleteExpActionCreator = (id) => (dispatch, getState) => {
   const token = getState().auth.token;
-  fetch(`/profile/experience/${id}`, {
+  fetch(`/api/profile/experience/${id}`, {
     method: "DELETE",
     headers: {
       "x-auth-token": token,
@@ -198,7 +198,7 @@ export const deleteExpActionCreator = (id) => (dispatch, getState) => {
 export const deleteProfileActionCreator = (history) => (dispatch, getState) => {
   const token = getState().auth.token;
   console.log('inside deleteProfile action creator.')
-  fetch("/profile", {
+  fetch("/api/profile", {
     method: "DELETE",
     headers: {
       "x-auth-token": token,
@@ -232,7 +232,7 @@ export const updatePicActionCreator = (value, history) => (
 ) => {
   console.log("Got picname ", value);
   const token = getState().auth.token;
-  return fetch("/users/pic", {
+  return fetch("/api/users/pic", {
     method: "POST",
     headers: {
       "x-auth-token": token,

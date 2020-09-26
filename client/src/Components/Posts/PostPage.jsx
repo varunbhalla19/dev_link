@@ -37,7 +37,7 @@ const PostPage = ({
   return (
     <div className="landing-inner">
       {singlePost.loading ? (
-        <h3> Loading... </h3>
+        <h3 className="head-yellow" > Loading... </h3>
       ) : !singlePost.exist ? (
         <h2> Doesnt Exist </h2>
       ) : (

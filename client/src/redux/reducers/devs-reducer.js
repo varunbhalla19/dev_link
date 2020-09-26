@@ -41,7 +41,7 @@ export default (state = initProfiles, { type, payload }) => {
 };
 
 export const getDevProfsActionCreator = () => (dispatch) => {
-  return fetch("/profile", {
+  return fetch("/api/profile", {
     method: "GET",
     headers: { "content-type": "application/json" },
   })
@@ -69,7 +69,7 @@ export const getDevProfsActionCreator = () => (dispatch) => {
 };
 
 export const getSingleDevActionCreator = (userId) => (dispatch) => {
-  return fetch(`/profile/user/${userId}`, { method: "GET" })
+  return fetch(`/api/profile/user/${userId}`, { method: "GET" })
     .then((res) => {
       if (res.status === 200) {
         return res.json();

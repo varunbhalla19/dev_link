@@ -51,7 +51,7 @@ export default (state = initPost, { type, payload }) => {
 };
 
 export const getSinglePostActionCreator = (id) => (dispatch) => {
-  fetch(`/post/${id}`, { method: "GET" })
+  fetch(`/api/post/${id}`, { method: "GET" })
     .then((res) => {
       if (res.status === 200) {
         return res.json();
@@ -82,7 +82,7 @@ export const submitCommentActionCreator = (value, postId) => (
   getState
 ) => {
   const token = getState().auth.token;
-  fetch(`/post/comment/${postId}`, {
+  fetch(`/api/post/comment/${postId}`, {
     method: "PUT",
     body: JSON.stringify({
       content: value,
@@ -123,7 +123,7 @@ export const singlePostLikeUnlikeActionCreator = (postId) => (
 ) => {
   const token = getState().auth.token;
 
-  fetch(`/post/likeUnlike/${postId}`, {
+  fetch(`/api/post/likeUnlike/${postId}`, {
     method: "PUT",
     headers: {
       "x-auth-token": token,
@@ -159,7 +159,7 @@ export const singlePostDeleteActionCreator = (id, cb) => (
   getState
 ) => {
   const token = getState().auth.token;
-  fetch(`/post/${id}`, {
+  fetch(`/api/post/${id}`, {
     method: "DELETE",
     headers: {
       "x-auth-token": token,

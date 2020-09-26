@@ -12,7 +12,7 @@ export const authActionTypes = {
 
 export const initAuthActionCreator = () => (dispatch) => {
   const token = localStorage.getItem("token");
-  fetch("/users", {
+  fetch("/api/users", {
     method : "GET",
     headers: {
       "x-auth-token": token,
@@ -69,7 +69,7 @@ export default (state = initAuth, { type, payload }) => {
 };
 
 export const loginActionCreator = (loginData) => (dispatch) => {
-  fetch("/auth/login", {
+  fetch("/api/auth/login", {
     method: "POST",
     body: JSON.stringify(loginData),
     headers: { "content-type": "application/json" },
@@ -103,7 +103,7 @@ export const loginActionCreator = (loginData) => (dispatch) => {
 };
 
 export const signupActionCreator = (signupData) => (dispatch) => {
-  fetch("/auth/signup", {
+  fetch("/api/auth/signup", {
     method: "POST",
     body: JSON.stringify(signupData),
     headers: { "content-type": "application/json" },

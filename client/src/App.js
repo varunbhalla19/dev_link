@@ -39,8 +39,8 @@ function App({ initAuth }) {
           <Route path="/devs" component={Devs} />
           <Route path="/profile" component={MyProfile} />
           <Route path="/user/:userId" component={UserProfile} />
-          <Route path="/posts" component={Posts} />
           <Route path="/post/:postId" component={PostPage} />
+          <Route path="/posts" component={Posts} />
         </Switch>
       </BrowserRouter>
     </div>

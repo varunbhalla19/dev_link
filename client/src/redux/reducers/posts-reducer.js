@@ -70,7 +70,7 @@ export default (state = initPosts, { type, payload }) => {
 
 export const createPostActionCreator = (post) => (dispatch, getState) => {
   const token = getState().auth.token;
-  fetch("/post", {
+  fetch("/api/post", {
     method: "POST",
     body: JSON.stringify({ content: post }),
     headers: {
@@ -106,7 +106,7 @@ export const createPostActionCreator = (post) => (dispatch, getState) => {
 };
 
 export const getPostsActionCreator = () => (dispatch) => {
-  fetch("/post", {
+  fetch("/api/post", {
     method: "GET",
     headers: { "content-type": "application/json" },
   })
@@ -135,7 +135,7 @@ export const getPostsActionCreator = () => (dispatch) => {
 
 export const postDeleteActionCreator = (id) => (dispatch, getState) => {
   const token = getState().auth.token;
-  fetch(`/post/${id}`, {
+  fetch(`/api/post/${id}`, {
     method: "DELETE",
     headers: {
       "x-auth-token": token,
@@ -167,7 +167,7 @@ export const postDeleteActionCreator = (id) => (dispatch, getState) => {
 
 export const postLikeUnlikeActionCreator = (postId) => (dispatch, getState) => {
   const token = getState().auth.token;
-  fetch(`/post/likeUnlike/${postId}`, {
+  fetch(`/api/post/likeUnlike/${postId}`, {
     method: "PUT",
     headers: {
       "x-auth-token": token,
